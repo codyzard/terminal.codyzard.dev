@@ -1,59 +1,85 @@
 'use client'
 import {executeCommand} from '@/src/utils/command-executor'
-import {useState, useRef, useEffect} from 'react'
+import {useState, useRef, useEffect, useCallback} from 'react'
 import CommandHistory from '../command-history'
+import type {CommandInputRef} from '../command-input';
 import CommandInput from '../command-input'
-import type {ExecutionResult, TerminalOutput} from '@/src/types'
+import type {TerminalOutput} from '@/src/types'
 
 export const Terminal = () => {
-  const [history, setHistory] = useState<TerminalOutput[]>([])
+  const [history, setHistory] = useState<TerminalOutput[]>(() => {
+    const welcomeOutput = executeCommand('welcome');
+    return [
+      {type: 'input', content: 'welcome'},
+      {type: 'output', content: welcomeOutput.content, isError: welcomeOutput.isError},
+    ];
+  })
   const historyEndRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<CommandInputRef>(null);
 
-  // Focus vào input mỗi khi terminal được render
+  // Hàm focus input khi click vào Terminal
   const focusInput = () => {
-    // Logic focus input sẽ nằm trong CommandInput component
-  }
+    inputRef.current?.focusInput();
+  };
 
   // Tự động cuộn xuống cuối khi có output mới
   useEffect(() => {
     historyEndRef.current?.scrollIntoView({behavior: 'smooth'})
   }, [history])
+  
 
-  const handleCommand = (command: string) => {
-    if (!command.trim()) return
+  const handleCommand = useCallback((command: string) => {
+    if (!command.trim()) return;
 
-    // 1. Xử lý và nhận output
-    const output: ExecutionResult = executeCommand(command) // Sử dụng kiểu ExecutionResult
+    // Sử dụng function form để đảm bảo cập nhật state mới nhất
+    setHistory((prev) => {
+      // 1. Xử lý và nhận output
+      const output = executeCommand(command); 
 
-    // KIỂM TRA HÀNH ĐỘNG ĐẶC BIỆT
-    if (output.specialAction === 'clear') {
-      setHistory([]) // Reset history thành mảng rỗng
-      return // Dừng việc thêm input và output vào history
-    }
+      // KIỂM TRA HÀNH ĐỘNG ĐẶC BIỆT
+      if (output.specialAction === 'clear') {
+        return []; // Reset history thành mảng rỗng
+      }
+      
+      // 2. Thêm input và output vào history
+      return [
+        ...prev,
+        {type: 'input', content: command},
+        {type: 'output', content: output.content, isError: output.isError},
+      ];
+    });
+  }, []);
 
-    // 2. Thêm lệnh input vào history (Chỉ thực hiện nếu không phải lệnh 'clear')
-    setHistory((prev) => [...prev, {type: 'input', content: command}])
-
-    // 3. Thêm output vào history (Chỉ thực hiện nếu không phải lệnh 'clear')
-    setHistory((prev) => [
-      ...prev,
-      {type: 'output', content: output.content, isError: output.isError},
-    ])
-  }
-
-  // Lệnh đầu tiên: Hiển thị Welcome Message
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    handleCommand('welcome')
-  }, [])
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Điều kiện: Phím 'k' (không phân biệt chữ hoa/thường)
+      // VÀ (CmdKey trên Mac HOẶC CtrlKey trên Windows/Linux)
+      if (e.key.toLowerCase() === 'k' && (e.metaKey || e.ctrlKey)) {
+        
+        e.preventDefault(); // Rất quan trọng: Ngăn trình duyệt mở Quick Find hoặc các hành động mặc định khác
+        
+        // Gọi lệnh clear
+        handleCommand('clear');
+      }
+    };
+
+    // Đính kèm sự kiện vào cửa sổ (toàn cục)
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup: Xóa sự kiện khi component bị unmount
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleCommand]); // Đảm bảo useEffect chạy lại nếu handleCommand thay đổi (nhưng vì dùng useCallback nên nó sẽ không thay đổi)
+
 
   return (
     <div
-      className="bg-gray-900 p-4 h-screen overflow-y-auto font-mono text-green-400"
+      className="bg-gray-900 h-screen overflow-y-auto font-mono text-green-400"
       onClick={focusInput}
     >
       <CommandHistory history={history} />
-      <CommandInput onCommand={handleCommand} />
+      <CommandInput ref={inputRef} onCommand={handleCommand} />
       <div ref={historyEndRef} />
     </div>
   )

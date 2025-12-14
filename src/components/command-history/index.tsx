@@ -11,7 +11,7 @@ const CommandHistory = ({history}: Props) => {
         <div key={index} className="whitespace-pre-wrap">
           {item.type === 'input' ? (
             <div className="flex">
-              <span className="mr-2 text-yellow-500">user@portfolio:~ $</span>
+              <span className="mr-2 text-yellow-500">user@codyzard:~ $</span>
               <span className="text-white">{item.content}</span>
             </div>
           ) : (

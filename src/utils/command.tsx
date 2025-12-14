@@ -3,11 +3,13 @@ import type {Command} from '../types'
 
 // Dữ liệu cá nhân của bạn
 const userData = {
-  name: 'John Doe',
-  title: 'Full Stack Developer',
-  email: 'john.doe@example.com',
-  github: 'https://github.com/johndoe',
-  linkedin: 'https://linkedin.com/in/johndoe',
+  name: 'Le Hoang Tu',
+  title: 'Software Engineer',
+  email: 'mrahn1234@gmail.com',
+  github: 'https://github.com/codyzard',
+  linkedin: 'https://www.linkedin.com/in/l%C3%AA-ho%C3%A0ng-t%C3%BA-676b89136/',
+  blog: 'https://developers.prtimes.jp/author/lehoangtu498b09a43f',
+  location: 'Tokyo, Japan',
 }
 
 // Hàm hiển thị danh sách lệnh (HELP command)
@@ -15,7 +17,7 @@ const helpCommand: Command = {
   name: 'help',
   description: 'Lists all available commands.',
   execute: () => {
-    const commandList = Object.values(commands).map((cmd) => (
+    const commandList = Object.values(commands).sort((a, b) => a.name.localeCompare(b.name)).map((cmd) => (
       <div key={cmd.name} className="flex space-x-4">
         <span className="inline-block w-24 text-yellow-400">{cmd.name}</span>
         <span>{cmd.description}</span>
@@ -42,11 +44,10 @@ const summaryCommand: Command = {
     return {
       content: (
         <>
-          <p className="mb-2 text-lg text-white">{userData.title}</p>
+          <p className="mb-2 text-white text-lg">{userData.title}</p>
           <p>
             Hi, I&apos;m **{userData.name}**, a passionate developer specializing in modern web
-            technologies like **Next.js, React, and TypeScript**. I focus on building performant,
-            scalable, and user-friendly applications.
+            technologies like **Next.js, React, and TypeScript**. Now based in Tokyo, Japan
           </p>
           <p className="mt-2">
             Use **&apos;skills&apos;** to see my tech stack or **&apos;contact&apos;** for my
@@ -105,7 +106,7 @@ const welcomeCommand: Command = {
     return {
       content: (
         <>
-          <p className="text-3xl text-yellow-400">**TERMINAL PORTFOLIO**</p>
+          <p className="text-yellow-400 text-3xl">Hi my name Le Hoang Tu aka Codyzard</p>
           <p className="mt-4">
             Welcome to my personal portfolio. This interface simulates a UNIX-like shell.
           </p>
@@ -124,23 +125,54 @@ const skillsCommand: Command = {
     return {
       content: (
         <>
-          <p className="mb-2 text-lg text-white">My Tech Stack:</p>
+          <p className="mb-2 text-white text-lg">My Tech Stack 💻:</p>
           {/* Bạn có thể thay đổi nội dung này theo kỹ năng thực tế của mình */}
-          <div className="grid grid-cols-2 gap-y-1">
+          <div className="gap-y-1 grid grid-cols-2">
             <span className="font-bold text-yellow-400">Frontend:</span>{' '}
-            <span>React, Next.js, TypeScript, Tailwind CSS, Redux/Zustand</span>
+            <span>React, Next.js, TypeScript, Tailwind CSS</span>
             <span className="font-bold text-yellow-400">Backend:</span>{' '}
-            <span>Node.js, Express, Python (Django/Flask), GraphQL</span>
+            <span>PHP, Go, Hono, Node.js, Express</span>
             <span className="font-bold text-yellow-400">Database:</span>{' '}
-            <span>PostgreSQL, MongoDB</span>
+            <span>PostgreSQL, MySQL, DynamoDB</span>
             <span className="font-bold text-yellow-400">DevOps/Tools:</span>{' '}
             <span>Git, Docker, AWS (S3, Lambda), CI/CD</span>
+            <span className="font-bold text-yellow-400">Languages:</span>{' '}
+            <span>English, Japanese, Vietnamese</span>
           </div>
         </>
       ),
     }
   },
 }
+
+// --- Lệnh CV ---
+const cvCommand: Command = {
+    name: 'cv',
+    description: 'Opens my professional CV in a new browser tab.',
+    execute: () => {
+        // Sử dụng đường dẫn tuyệt đối bắt đầu từ root (thư mục public)
+        window.open('/cv.pdf', '_blank'); 
+        
+        return { 
+            content: 'Opening CV in a new tab...' 
+        };
+    },
+};
+
+// --- Lệnh resume ---
+const resumeCommand: Command = {
+    name: 'resume',
+    description: 'Opens my professional Resume in a new browser tab.',
+    execute: () => {
+        // Sử dụng đường dẫn tuyệt đối bắt đầu từ root (thư mục public)
+        window.open('/resume.pdf', '_blank'); 
+        
+        return { 
+            content: 'Opening Resume in a new tab...' 
+        };
+    },
+};
+
 
 // Lệnh CLEAR
 const clearCommand: Command = {
@@ -163,7 +195,7 @@ export const commands: { [key: string]: Command } = {
     name: 'blog',
     description: 'Opens my development blog in a new tab.',
     execute: () => {
-      window.open('YOUR_BLOG_URL', '_blank')
+      window.open(userData.blog, '_blank')
       return {content: 'Opening blog in a new tab...'}
     },
   },
@@ -187,4 +219,6 @@ export const commands: { [key: string]: Command } = {
   welcome: welcomeCommand,
   skills: skillsCommand,
   clear: clearCommand,
+  cv: cvCommand,
+  resume: resumeCommand,
 }

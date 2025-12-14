@@ -1,47 +1,55 @@
-import React, {useState, useRef, useEffect} from 'react'
 
-type Props = {
-  onCommand: (command: string) => void
+
+import React, {useState, useRef, useEffect, forwardRef, useImperativeHandle} from 'react';
+
+interface Props {
+  onCommand: (command: string) => void;
 }
 
-const CommandInput = ({onCommand}: Props) => {
-  const [command, setCommand] = useState('')
-  const inputRef = useRef<HTMLInputElement>(null)
+export interface CommandInputRef {
+  focusInput: () => void;
+}
 
-  // Focus vào input khi component được load
+// Sử dụng forwardRef để component này có thể nhận ref từ component cha
+const CommandInput = forwardRef<CommandInputRef, Props>(({onCommand}, ref) => {
+  const [command, setCommand] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Expose hàm focusInput ra bên ngoài thông qua ref
+  useImperativeHandle(ref, () => ({
+    focusInput() {
+      inputRef.current?.focus();
+    }
+  }));
+
+  // Auto focus khi component được load lần đầu
   useEffect(() => {
-    inputRef.current?.focus()
-  }, [])
-
-  // Focus vào input khi click vào bất kỳ đâu trên Terminal
-  const handleTerminalClick = () => {
-    inputRef.current?.focus()
-  }
+    inputRef.current?.focus();
+  }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      onCommand(command)
-      setCommand('') // Xóa input sau khi gửi lệnh
+      onCommand(command);
+      setCommand(''); 
     }
-    // TODO: Thêm logic history lệnh (mũi tên lên/xuống)
-  }
+  };
 
   return (
-    <div className="flex items-center" onClick={handleTerminalClick}>
-      <span className="mr-2 text-yellow-500">user@portfolio:~ $</span>
+    <div className="flex items-center">
+      <span className="mr-2 text-yellow-500">user@codyzard:~ $</span>
       <input
         ref={inputRef}
         type="text"
         value={command}
         onChange={(e) => setCommand(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="flex-grow bg-transparent border-none outline-none text-green-400"
-        autoFocus
+        className="bg-transparent border-none outline-none text-green-400 grow"
         spellCheck="false"
         autoComplete="off"
       />
     </div>
-  )
-}
+  );
+});
 
-export default CommandInput
+CommandInput.displayName = 'CommandInput'; // Nên thêm display name khi dùng forwardRef
+export default CommandInput;
