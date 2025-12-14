@@ -145,20 +145,6 @@ const skillsCommand: Command = {
   },
 }
 
-// --- Lệnh CV ---
-const cvCommand: Command = {
-    name: 'cv',
-    description: 'Opens my professional CV in a new browser tab.',
-    execute: () => {
-        // Sử dụng đường dẫn tuyệt đối bắt đầu từ root (thư mục public)
-        window.open('/cv.pdf', '_blank'); 
-        
-        return { 
-            content: 'Opening CV in a new tab...' 
-        };
-    },
-};
-
 // --- Lệnh resume ---
 const resumeCommand: Command = {
     name: 'resume',
@@ -219,6 +205,5 @@ export const commands: { [key: string]: Command } = {
   welcome: welcomeCommand,
   skills: skillsCommand,
   clear: clearCommand,
-  cv: cvCommand,
   resume: resumeCommand,
 }
