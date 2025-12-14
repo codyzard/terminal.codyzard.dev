@@ -1,11 +1,10 @@
-import React from 'react'
-import { TerminalOutput } from '../types/types'
+import type {TerminalOutput} from '@/src/types'
 
-interface Props {
+type Props = {
   history: TerminalOutput[]
 }
 
-const CommandHistory: React.FC<Props> = ({ history }) => {
+const CommandHistory = ({history}: Props) => {
   return (
     <div>
       {history.map((item, index) => (

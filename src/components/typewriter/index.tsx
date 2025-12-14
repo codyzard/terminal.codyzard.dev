@@ -1,13 +1,14 @@
 'use client'
-import { useState, useEffect } from 'react'
+import type {ReactNode} from 'react';
+import {useState, useEffect} from 'react'
 
-interface TypewriterProps {
-  text: string | JSX.Element
+type TypewriterProps = {
+  text: string | ReactNode
   delay?: number // Độ trễ giữa các ký tự (ms)
   onTypingComplete?: () => void
 }
 
-const Typewriter: React.FC<TypewriterProps> = ({ text, delay = 20, onTypingComplete }) => {
+const Typewriter = ({text, delay = 20, onTypingComplete}: TypewriterProps) => {
   const [displayedText, setDisplayedText] = useState('')
   const [index, setIndex] = useState(0)
 

@@ -1,9 +1,9 @@
 'use client'
-import { ExecutionResult, TerminalOutput } from '@/src/types/type'
-import { executeCommand } from '@/src/utils/command-executor'
-import { useState, useRef, useEffect } from 'react'
+import {executeCommand} from '@/src/utils/command-executor'
+import {useState, useRef, useEffect} from 'react'
 import CommandHistory from '../command-history'
 import CommandInput from '../command-input'
+import type {ExecutionResult, TerminalOutput} from '@/src/types'
 
 export const Terminal = () => {
   const [history, setHistory] = useState<TerminalOutput[]>([])
@@ -16,7 +16,7 @@ export const Terminal = () => {
 
   // Tự động cuộn xuống cuối khi có output mới
   useEffect(() => {
-    historyEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    historyEndRef.current?.scrollIntoView({behavior: 'smooth'})
   }, [history])
 
   const handleCommand = (command: string) => {
@@ -32,12 +32,12 @@ export const Terminal = () => {
     }
 
     // 2. Thêm lệnh input vào history (Chỉ thực hiện nếu không phải lệnh 'clear')
-    setHistory((prev) => [...prev, { type: 'input', content: command }])
+    setHistory((prev) => [...prev, {type: 'input', content: command}])
 
     // 3. Thêm output vào history (Chỉ thực hiện nếu không phải lệnh 'clear')
     setHistory((prev) => [
       ...prev,
-      { type: 'output', content: output.content, isError: output.isError },
+      {type: 'output', content: output.content, isError: output.isError},
     ])
   }
 
@@ -49,7 +49,7 @@ export const Terminal = () => {
 
   return (
     <div
-      className="h-screen overflow-y-auto bg-gray-900 p-4 font-mono text-green-400"
+      className="bg-gray-900 p-4 h-screen overflow-y-auto font-mono text-green-400"
       onClick={focusInput}
     >
       <CommandHistory history={history} />

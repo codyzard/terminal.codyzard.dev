@@ -1,11 +1,10 @@
-// components/CommandInput.tsx
-import React, { useState, useRef, useEffect } from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 
-interface Props {
+type Props = {
   onCommand: (command: string) => void
 }
 
-const CommandInput: React.FC<Props> = ({ onCommand }) => {
+const CommandInput = ({onCommand}: Props) => {
   const [command, setCommand] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -36,7 +35,7 @@ const CommandInput: React.FC<Props> = ({ onCommand }) => {
         value={command}
         onChange={(e) => setCommand(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="flex-grow border-none bg-transparent text-green-400 outline-none"
+        className="flex-grow bg-transparent border-none outline-none text-green-400"
         autoFocus
         spellCheck="false"
         autoComplete="off"

@@ -1,10 +1,5 @@
-import { JSX } from 'react'
-import { commands } from './command'
-
-interface ExecutionResult {
-  content: string | JSX.Element
-  isError?: boolean
-}
+import type {ExecutionResult} from '../types'
+import {commands} from './command'
 
 export const executeCommand = (fullCommand: string): ExecutionResult => {
   const parts = fullCommand.trim().split(/\s+/)

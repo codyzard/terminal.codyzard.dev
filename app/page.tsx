@@ -1,4 +1,4 @@
-import { Terminal } from '@/src/components/terminal'
+import {Terminal} from '@/src/components/terminal'
 
 const HomePage = () => {
   return (

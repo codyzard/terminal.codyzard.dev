@@ -1,5 +1,5 @@
 // utils/commands.tsx
-import { Command } from '../types/types'
+import type {Command} from '../types'
 
 // Dữ liệu cá nhân của bạn
 const userData = {
@@ -42,7 +42,7 @@ const summaryCommand: Command = {
     return {
       content: (
         <>
-          <p className="mb-2 text-white text-lg">{userData.title}</p>
+          <p className="mb-2 text-lg text-white">{userData.title}</p>
           <p>
             Hi, I&apos;m **{userData.name}**, a passionate developer specializing in modern web
             technologies like **Next.js, React, and TypeScript**. I focus on building performant,
@@ -105,7 +105,7 @@ const welcomeCommand: Command = {
     return {
       content: (
         <>
-          <p className="text-yellow-400 text-3xl">**TERMINAL PORTFOLIO**</p>
+          <p className="text-3xl text-yellow-400">**TERMINAL PORTFOLIO**</p>
           <p className="mt-4">
             Welcome to my personal portfolio. This interface simulates a UNIX-like shell.
           </p>
@@ -124,9 +124,9 @@ const skillsCommand: Command = {
     return {
       content: (
         <>
-          <p className="mb-2 text-white text-lg">My Tech Stack:</p>
+          <p className="mb-2 text-lg text-white">My Tech Stack:</p>
           {/* Bạn có thể thay đổi nội dung này theo kỹ năng thực tế của mình */}
-          <div className="gap-y-1 grid grid-cols-2">
+          <div className="grid grid-cols-2 gap-y-1">
             <span className="font-bold text-yellow-400">Frontend:</span>{' '}
             <span>React, Next.js, TypeScript, Tailwind CSS, Redux/Zustand</span>
             <span className="font-bold text-yellow-400">Backend:</span>{' '}
@@ -164,7 +164,7 @@ export const commands: { [key: string]: Command } = {
     description: 'Opens my development blog in a new tab.',
     execute: () => {
       window.open('YOUR_BLOG_URL', '_blank')
-      return { content: 'Opening blog in a new tab...' }
+      return {content: 'Opening blog in a new tab...'}
     },
   },
   github: {
@@ -172,7 +172,7 @@ export const commands: { [key: string]: Command } = {
     description: 'Opens my GitHub profile in a new tab.',
     execute: () => {
       window.open(userData.github, '_blank')
-      return { content: 'Opening GitHub profile in a new tab...' }
+      return {content: 'Opening GitHub profile in a new tab...'}
     },
   },
   linkedin: {
@@ -180,7 +180,7 @@ export const commands: { [key: string]: Command } = {
     description: 'Opens my LinkedIn profile in a new tab.',
     execute: () => {
       window.open(userData.linkedin, '_blank')
-      return { content: 'Opening LinkedIn profile in a new tab...' }
+      return {content: 'Opening LinkedIn profile in a new tab...'}
     },
   },
   contact: contactCommand,
