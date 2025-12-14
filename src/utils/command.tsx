@@ -17,12 +17,14 @@ const helpCommand: Command = {
   name: 'help',
   description: 'Lists all available commands.',
   execute: () => {
-    const commandList = Object.values(commands).sort((a, b) => a.name.localeCompare(b.name)).map((cmd) => (
-      <div key={cmd.name} className="flex space-x-4">
-        <span className="inline-block w-24 text-yellow-400">{cmd.name}</span>
-        <span>{cmd.description}</span>
-      </div>
-    ))
+    const commandList = Object.values(commands)
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((cmd) => (
+        <div key={cmd.name} className="flex space-x-4">
+          <span className="inline-block w-24 text-yellow-400">{cmd.name}</span>
+          <span>{cmd.description}</span>
+        </div>
+      ))
 
     return {
       content: (
@@ -44,7 +46,7 @@ const summaryCommand: Command = {
     return {
       content: (
         <>
-          <p className="mb-2 text-white text-lg">{userData.title}</p>
+          <p className="mb-2 text-lg text-white">{userData.title}</p>
           <p>
             Hi, I&apos;m **{userData.name}**, a passionate developer specializing in modern web
             technologies like **Next.js, React, and TypeScript**. Now based in Tokyo, Japan
@@ -106,11 +108,19 @@ const welcomeCommand: Command = {
     return {
       content: (
         <>
-          <p className="text-yellow-400 text-3xl">Hi my name Le Hoang Tu aka Codyzard</p>
-          <p className="mt-4">
-            Welcome to my personal portfolio. This interface simulates a UNIX-like shell.
+          <p className="text-xl text-yellow-400">[ 💻 Initializing Terminal Portfolio ]</p>
+          <p className="mt-1 text-sm text-green-500">
+            $ system_info: Hostname: Codyzard.dev | User: Le Hoang Tu (Guest)
           </p>
-          <p>Type **&apos;help&apos;** to see the list of available commands.</p>
+          <div className="mt-4">
+            <p>Authentication success. Welcome to the **Codyzard.dev** CLI.</p>
+            <p>I`&apos;`m **Le Hoang Tu**, a developer specializing in modern web stack.</p>
+            <p className="mt-2 text-cyan-400">* Status: Awaiting command input...</p>
+          </div>
+          <p className="mt-3">
+            Type **`&apos;`help`&apos;`** for command directory, or **`&apos;`summary`&apos;`** to
+            begin.
+          </p>
         </>
       ),
     }
@@ -125,9 +135,9 @@ const skillsCommand: Command = {
     return {
       content: (
         <>
-          <p className="mb-2 text-white text-lg">My Tech Stack 💻:</p>
+          <p className="mb-2 text-lg text-white">My Tech Stack 💻:</p>
           {/* Bạn có thể thay đổi nội dung này theo kỹ năng thực tế của mình */}
-          <div className="gap-y-1 grid grid-cols-2">
+          <div className="grid grid-cols-2 gap-y-1">
             <span className="font-bold text-yellow-400">Frontend:</span>{' '}
             <span>React, Next.js, TypeScript, Tailwind CSS</span>
             <span className="font-bold text-yellow-400">Backend:</span>{' '}
@@ -147,18 +157,17 @@ const skillsCommand: Command = {
 
 // --- Lệnh resume ---
 const resumeCommand: Command = {
-    name: 'resume',
-    description: 'Opens my professional Resume in a new browser tab.',
-    execute: () => {
-        // Sử dụng đường dẫn tuyệt đối bắt đầu từ root (thư mục public)
-        window.open('/resume.pdf', '_blank'); 
-        
-        return { 
-            content: 'Opening Resume in a new tab...' 
-        };
-    },
-};
+  name: 'resume',
+  description: 'Opens my professional Resume in a new browser tab.',
+  execute: () => {
+    // Sử dụng đường dẫn tuyệt đối bắt đầu từ root (thư mục public)
+    window.open('/resume.pdf', '_blank')
 
+    return {
+      content: 'Opening Resume in a new tab...',
+    }
+  },
+}
 
 // Lệnh CLEAR
 const clearCommand: Command = {

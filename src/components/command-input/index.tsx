@@ -1,38 +1,36 @@
-
-
-import React, {useState, useRef, useEffect, forwardRef, useImperativeHandle} from 'react';
+import React, {useState, useRef, useEffect, forwardRef, useImperativeHandle} from 'react'
 
 interface Props {
-  onCommand: (command: string) => void;
+  onCommand: (command: string) => void
 }
 
 export interface CommandInputRef {
-  focusInput: () => void;
+  focusInput: () => void
 }
 
 // Sử dụng forwardRef để component này có thể nhận ref từ component cha
 const CommandInput = forwardRef<CommandInputRef, Props>(({onCommand}, ref) => {
-  const [command, setCommand] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [command, setCommand] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   // Expose hàm focusInput ra bên ngoài thông qua ref
   useImperativeHandle(ref, () => ({
     focusInput() {
-      inputRef.current?.focus();
-    }
-  }));
+      inputRef.current?.focus()
+    },
+  }))
 
   // Auto focus khi component được load lần đầu
   useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+    inputRef.current?.focus()
+  }, [])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      onCommand(command);
-      setCommand(''); 
+      onCommand(command)
+      setCommand('')
     }
-  };
+  }
 
   return (
     <div className="flex items-center">
@@ -43,13 +41,13 @@ const CommandInput = forwardRef<CommandInputRef, Props>(({onCommand}, ref) => {
         value={command}
         onChange={(e) => setCommand(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="bg-transparent border-none outline-none text-green-400 grow"
+        className="grow border-none bg-transparent text-green-400 outline-none"
         spellCheck="false"
         autoComplete="off"
       />
     </div>
-  );
-});
+  )
+})
 
-CommandInput.displayName = 'CommandInput'; // Nên thêm display name khi dùng forwardRef
-export default CommandInput;
+CommandInput.displayName = 'CommandInput' // Nên thêm display name khi dùng forwardRef
+export default CommandInput
