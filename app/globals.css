@@ -1,1 +1,48 @@
 @import 'tailwindcss';
+
+/* --- Định nghĩa Biến CSS mặc định (Fallback) --- */
+:root {
+  /* Màu nền của Terminal */
+  --bg-color: #1f2937; /* Gray-800 */
+  /* Màu chữ chung */
+  --text-color: #10b981; /* Emerald-500 */
+  /* Màu prompt */
+  --prompt-color: #f59e0b; /* Amber-500 */
+}
+
+/* --- Theme Dark (Mặc định) --- */
+.dark {
+  --bg-color: #111827; /* Gray-900 */
+  --text-color: #34d399; /* Emerald-400 */
+  --prompt-color: #fcd34d; /* Amber-300 */
+}
+
+/* --- Theme Light --- */
+.light {
+  --bg-color: #f9fafb; /* Gray-50 */
+  --text-color: #1f2937; /* Gray-800 */
+  --prompt-color: #ef4444; /* Red-500 */
+}
+
+/* --- Theme Hacker (Xanh lá) --- */
+.hacker {
+  --bg-color: #000000;
+  --text-color: #00ff00;
+  --prompt-color: #008000;
+}
+
+/* --- Áp dụng biến CSS trong Terminal Component --- */
+/* Đảm bảo cập nhật Terminal.tsx và CommandInput.tsx để dùng các biến này */
+.app-container {
+  /* Nếu bạn muốn áp dụng theme cho toàn bộ app, nhưng chủ yếu là Terminal */
+}
+
+/* Cấu hình Terminal */
+.terminal {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+/* Cấu hình Prompt */
+.prompt {
+  color: var(--prompt-color);
+}

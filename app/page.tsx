@@ -1,9 +1,12 @@
 import {Terminal} from '@/src/components/terminal'
+import {ThemeWrapper} from '@/src/contexts/theme-context'
 
 const HomePage = () => {
   return (
     <div className="min-h-screen">
-      <Terminal />
+      <ThemeWrapper>
+        <Terminal />
+      </ThemeWrapper>
     </div>
   )
 }

@@ -5,6 +5,8 @@ import CommandHistory from '../command-history'
 import type {CommandInputRef} from '../command-input'
 import CommandInput from '../command-input'
 import type {TerminalOutput} from '@/src/types'
+import type {ThemeName} from '@/src/contexts/theme-context';
+import {useTheme} from '@/src/contexts/theme-context'
 
 export const Terminal = () => {
   const [history, setHistory] = useState<TerminalOutput[]>(() => {
@@ -16,6 +18,7 @@ export const Terminal = () => {
   })
   const historyEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<CommandInputRef>(null)
+  const {setTheme} = useTheme()
 
   // Hàm focus input khi click vào Terminal
   const focusInput = () => {
@@ -35,6 +38,11 @@ export const Terminal = () => {
       // 1. Xử lý và nhận output
       const output = executeCommand(command)
 
+      // Xử lý Lệnh Theme
+      if (output.specialAction === 'setTheme' && output.themeName) {
+        setTheme(output.themeName as ThemeName) // <-- GỌI setTheme
+      }
+
       // KIỂM TRA HÀNH ĐỘNG ĐẶC BIỆT
       if (output.specialAction === 'clear') {
         return [] // Reset history thành mảng rỗng
@@ -47,7 +55,7 @@ export const Terminal = () => {
         {type: 'output', content: output.content, isError: output.isError},
       ]
     })
-  }, [])
+  }, [setTheme])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -72,7 +80,7 @@ export const Terminal = () => {
 
   return (
     <div
-      className="h-screen overflow-y-auto bg-gray-900 font-mono text-green-400"
+      className="bg-gray-900 h-screen overflow-y-auto font-mono text-green-400"
       onClick={focusInput}
     >
       <CommandHistory history={history} />

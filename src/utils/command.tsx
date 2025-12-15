@@ -1,4 +1,5 @@
 // utils/commands.tsx
+import type {ThemeName} from '../contexts/theme-context'
 import type {Command} from '../types'
 
 // Dữ liệu cá nhân của bạn
@@ -169,6 +170,34 @@ const resumeCommand: Command = {
   },
 }
 
+const themeCommand: Command = {
+  name: 'theme',
+  description: 'Change the terminal theme. Usage: theme <dark|light|hacker>',
+  execute: (args?: string[]) => {
+    const availableThemes: ThemeName[] = ['dark', 'light', 'hacker']
+    const newTheme = args?.[0]?.toLowerCase() as ThemeName
+
+    if (!newTheme || !availableThemes.includes(newTheme)) {
+      return {
+        content: (
+          <>
+            <p className="text-red-500">Error: Invalid theme name.</p>
+            <p>Available themes: **{availableThemes.join(', ')}**</p>
+            <p>Usage: theme {'<theme_name>'}</p>
+          </>
+        ),
+        isError: true,
+      }
+    }
+
+    return {
+      content: `Setting theme to '${newTheme}'...`,
+      specialAction: 'setTheme',
+      themeName: newTheme,
+    }
+  },
+}
+
 // Lệnh CLEAR
 const clearCommand: Command = {
   name: 'clear',
@@ -215,4 +244,5 @@ export const commands: { [key: string]: Command } = {
   skills: skillsCommand,
   clear: clearCommand,
   resume: resumeCommand,
+  theme: themeCommand,
 }
