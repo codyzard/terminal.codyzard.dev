@@ -1,6 +1,11 @@
-// utils/commands.tsx
+import type {ReactNode} from 'react'
 import type {ThemeName} from '../contexts/theme-context'
-import type {Command} from '../types'
+
+type Command = {
+  name: string
+  description: string
+  execute: (args: string[]) => { content: string | ReactNode; isError?: boolean }
+}
 
 // Dữ liệu cá nhân của bạn
 const userData = {

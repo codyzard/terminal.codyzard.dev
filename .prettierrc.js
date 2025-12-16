@@ -10,7 +10,9 @@ module.exports = {
   printWidth: 100,
   tabWidth: 2,
   arrowParens: 'always',
+  bracketSpacing: false,
+  end,
 
   // Plugin Tailwind CSS
-  plugins: ['prettier-plugin-tailwindcss'],
+  // plugins: ['prettier-plugin-tailwindcss'],
 }

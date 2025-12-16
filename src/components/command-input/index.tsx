@@ -1,3 +1,4 @@
+import type {KeyboardEvent} from 'react'
 import React, {useState, useRef, useEffect, forwardRef, useImperativeHandle} from 'react'
 
 interface Props {
@@ -25,7 +26,7 @@ const CommandInput = forwardRef<CommandInputRef, Props>(({onCommand}, ref) => {
     inputRef.current?.focus()
   }, [])
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       onCommand(command)
       setCommand('')
@@ -34,14 +35,14 @@ const CommandInput = forwardRef<CommandInputRef, Props>(({onCommand}, ref) => {
 
   return (
     <div className="flex items-center">
-      <span className="mr-2 text-yellow-500">user@codyzard:~ $</span>
+      <span className="prompt mr-2">user@codyzard:~ $</span>
       <input
         ref={inputRef}
         type="text"
         value={command}
         onChange={(e) => setCommand(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="grow border-none bg-transparent text-green-400 outline-none"
+        className="(var(--text-color)) grow border-none bg-transparent outline-none"
         spellCheck="false"
         autoComplete="off"
       />
