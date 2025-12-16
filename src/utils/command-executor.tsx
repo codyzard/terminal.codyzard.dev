@@ -1,5 +1,5 @@
 import type {ExecutionResult} from '../types'
-import {commands} from './command'
+import {commands} from '../commands'
 
 export const executeCommand = (fullCommand: string): ExecutionResult => {
   const parts = fullCommand.trim().split(/\s+/)
