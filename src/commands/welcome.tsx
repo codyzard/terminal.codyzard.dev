@@ -13,12 +13,11 @@ export const welcomeCommand: Command = {
           </p>
           <div className="mt-4">
             <p>Authentication success. Welcome to the **Codyzard.dev** CLI.</p>
-            <p>I`&apos;`m **Le Hoang Tu**, a developer specializing in modern web stack.</p>
+            <p>I&apos;m **Le Hoang Tu**, a developer specializing in modern web stack.</p>
             <p className="mt-2 text-cyan-400">* Status: Awaiting command input...</p>
           </div>
           <p className="mt-3">
-            Type **`&apos;`help`&apos;`** for command directory, or **`&apos;`summary`&apos;`** to
-            begin.
+            Type **&apos;help&apos;** for command directory, or **&apos;summary&apos;** to begin.
           </p>
         </>
       ),
