@@ -7,14 +7,27 @@ import {useCommandHistory} from '@/src/hooks/use-command-history'
 import {commandRegistry} from '@/src/commands'
 import {useGlobalKeyboardShortcuts} from './use-global-keyboard-shortcuts'
 
+/**
+ * Generate a unique ID for terminal output
+ */
+const generateOutputId = (() => {
+  let counter = 0
+  return () => `output-${Date.now()}-${counter++}`
+})()
+
 export const useTerminal = () => {
   // Get available commands for autocomplete
   const availableCommands = commandRegistry.getNames()
   const [history, setHistory] = useState<TerminalOutput[]>(() => {
     const welcomeOutput = executeCommand('welcome')
     return [
-      {type: 'input', content: 'welcome'},
-      {type: 'output', content: welcomeOutput.content, isError: welcomeOutput.isError},
+      {id: generateOutputId(), type: 'input', content: 'welcome'},
+      {
+        id: generateOutputId(),
+        type: 'output',
+        content: welcomeOutput.content,
+        isError: welcomeOutput.isError,
+      },
     ]
   })
   const historyEndRef = useRef<HTMLDivElement>(null)
@@ -70,7 +83,7 @@ export const useTerminal = () => {
       addToHistory(command)
 
       if (!command.trim()) {
-        setHistory((prev) => [...prev, {type: 'input', content: command}])
+        setHistory((prev) => [...prev, {id: generateOutputId(), type: 'input', content: command}])
         return
       }
 
@@ -88,8 +101,8 @@ export const useTerminal = () => {
 
       setHistory((prev) => [
         ...prev,
-        {type: 'input', content: command},
-        {type: 'output', content: output.content, isError: output.isError},
+        {id: generateOutputId(), type: 'input', content: command},
+        {id: generateOutputId(), type: 'output', content: output.content, isError: output.isError},
       ])
     },
     [handleSpecialAction, addToHistory],

@@ -25,6 +25,7 @@ export type ExecutionResult =
   | SetThemeExecutionResult
 
 export type TerminalOutput = {
+  id: string
   type: 'input' | 'output'
   content: string | ReactNode
   isError?: boolean

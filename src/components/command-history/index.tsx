@@ -8,8 +8,8 @@ type Props = {
 const CommandHistory = ({history}: Props) => {
   return (
     <div>
-      {history.map((item, index) => (
-        <div key={index} className="whitespace-pre-wrap">
+      {history.map((item) => (
+        <div key={item.id} className="whitespace-pre-wrap">
           {item.type === 'input' ? (
             <div className="flex">
               <span className="mr-2 text-yellow-500">{codyzardUser}</span>
