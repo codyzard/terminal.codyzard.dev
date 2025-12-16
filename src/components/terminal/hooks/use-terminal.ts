@@ -5,6 +5,7 @@ import {useCallback, useEffect, useRef, useState} from 'react'
 import {useTheme} from '@/src/contexts/theme-context'
 import {useCommandHistory} from '@/src/hooks/use-command-history'
 import {commandRegistry} from '@/src/commands'
+import {useGlobalKeyboardShortcuts} from './use-global-keyboard-shortcuts'
 
 export const useTerminal = () => {
   // Get available commands for autocomplete
@@ -26,33 +27,43 @@ export const useTerminal = () => {
     persistToStorage: true,
   })
 
-  // focus input when terminal is clicked
-  const focusInput = () => {
+  /**
+   * Focus input when terminal is clicked
+   */
+  const focusInput = useCallback(() => {
     inputRef.current?.focusInput()
-  }
+  }, [])
 
   // Automatically scroll to the bottom when there is new output
   useEffect(() => {
     historyEndRef.current?.scrollIntoView({behavior: 'smooth'})
   }, [history])
 
-  // Handle special actions and return whether to clear history
+  /**
+   * Handle special actions and return whether to clear history
+   */
   const handleSpecialAction = useCallback(
     (output: ReturnType<typeof executeCommand>): boolean => {
-      if ('specialAction' in output) {
-        if (output.specialAction === 'setTheme') {
+      if (!('specialAction' in output)) {
+        return false
+      }
+
+      switch (output.specialAction) {
+        case 'setTheme':
           setTheme(output.themeName)
           return false // Don't clear history
-        }
-        if (output.specialAction === 'clear') {
+        case 'clear':
           return true // Clear history
-        }
+        default:
+          return false
       }
-      return false
     },
     [setTheme],
   )
 
+  /**
+   * Handle command execution
+   */
   const handleCommand = useCallback(
     (command: string) => {
       // Add to command history (for up/down navigation)
@@ -84,24 +95,10 @@ export const useTerminal = () => {
     [handleSpecialAction, addToHistory],
   )
 
-  // Add global keyboard shortcut for 'clear' command (Cmd + K or Ctrl + K)
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Condition: Key 'k' (case-insensitive)
-      // AND (CmdKey on Mac OR CtrlKey on Windows/Linux)
-      if (e.key.toLowerCase() === 'k' && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault() // Very important: Prevent the browser from opening Quick Find or other default actions
-
-        // Call clear command
-        handleCommand('clear')
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [handleCommand])
+  // Setup global keyboard shortcuts
+  useGlobalKeyboardShortcuts({
+    onClear: () => handleCommand('clear'),
+  })
 
   return {
     history,

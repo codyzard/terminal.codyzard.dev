@@ -48,83 +48,122 @@ export const useCommandInput = ({
     inputRef.current?.focus()
   }, [])
 
+  /**
+   * Clear frozen suggestions and close autocomplete
+   */
+  const clearAutocomplete = useCallback(() => {
+    setFrozenSuggestions([])
+    autocomplete.reset()
+  }, [autocomplete])
+
   // Use frozen suggestions when open, otherwise calculate current suggestions
   const currentSuggestions = autocomplete.isOpen
     ? frozenSuggestions
-    : (enableAutocomplete ? autocomplete.getCurrentSuggestions(command) : [])
+    : enableAutocomplete
+      ? autocomplete.getCurrentSuggestions(command)
+      : []
 
   /**
-   * Handle keyboard events (Enter, Arrow Up, Arrow Down, Tab, Escape)
+   * Handle Tab key - Autocomplete
+   */
+  const handleTabKey = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>) => {
+      if (!enableAutocomplete) return false
+
+      e.preventDefault() // Prevent focus change
+
+      // Get current matches before Tab action
+      const suggestions = autocomplete.getCurrentSuggestions(command)
+      const {completed, shouldUpdateInput, shouldOpen} = autocomplete.handleTab(command)
+
+      // Freeze suggestions when opening
+      if (shouldOpen) {
+        setFrozenSuggestions(suggestions)
+      }
+
+      // Update command if autocompleted (single match)
+      if (shouldUpdateInput) {
+        setCommand(completed)
+        setFrozenSuggestions([])
+      }
+
+      return true
+    },
+    [command, enableAutocomplete, autocomplete],
+  )
+
+  /**
+   * Handle Escape key - Close autocomplete
+   */
+  const handleEscapeKey = useCallback(() => {
+    autocomplete.closeSuggestions()
+    setFrozenSuggestions([])
+  }, [autocomplete])
+
+  /**
+   * Handle Enter key - Execute command
+   */
+  const handleEnterKey = useCallback(() => {
+    onCommand(command)
+    setCommand('')
+    clearAutocomplete()
+  }, [command, onCommand, clearAutocomplete])
+
+  /**
+   * Handle Arrow Up key - Navigate to previous command in history
+   */
+  const handleArrowUpKey = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>) => {
+      e.preventDefault() // Prevent cursor movement
+      if (onNavigatePrevious) {
+        const previousCommand = onNavigatePrevious(command)
+        setCommand(previousCommand)
+      }
+    },
+    [command, onNavigatePrevious],
+  )
+
+  /**
+   * Handle Arrow Down key - Navigate to next command in history
+   */
+  const handleArrowDownKey = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>) => {
+      e.preventDefault() // Prevent cursor movement
+      if (onNavigateNext) {
+        const nextCommand = onNavigateNext(command)
+        setCommand(nextCommand)
+      }
+    },
+    [command, onNavigateNext],
+  )
+
+  /**
+   * Main keyboard event handler - delegates to specific key handlers
    */
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
-      // Handle Tab key - Autocomplete
-      if (e.key === 'Tab' && enableAutocomplete) {
-        e.preventDefault() // Prevent focus change
-
-        // Get current matches before Tab action
-        const suggestions = autocomplete.getCurrentSuggestions(command)
-
-        const {completed, shouldUpdateInput, shouldOpen} = autocomplete.handleTab(command)
-
-        // Freeze suggestions when opening
-        if (shouldOpen) {
-          setFrozenSuggestions(suggestions)
-        }
-
-        if (shouldUpdateInput) {
-          setCommand(completed)
-          // Clear frozen suggestions after autocomplete
-          setFrozenSuggestions([])
-        }
-        return
-      }
-
-      // Handle Escape key - Close autocomplete
-      if (e.key === 'Escape') {
-        autocomplete.closeSuggestions()
-        setFrozenSuggestions([])
-        return
-      }
-
-      // Handle Enter key - execute command
-      if (e.key === 'Enter') {
-        onCommand(command)
-        setCommand('')
-        autocomplete.reset()
-        setFrozenSuggestions([])
-        return
-      }
-
-      // Handle Up Arrow - command history only
-      if (e.key === 'ArrowUp') {
-        e.preventDefault() // Prevent cursor movement
-        if (onNavigatePrevious) {
-          const previousCommand = onNavigatePrevious(command)
-          setCommand(previousCommand)
-        }
-        return
-      }
-
-      // Handle Down Arrow - command history only
-      if (e.key === 'ArrowDown') {
-        e.preventDefault() // Prevent cursor movement
-        if (onNavigateNext) {
-          const nextCommand = onNavigateNext(command)
-          setCommand(nextCommand)
-        }
-        return
+      switch (e.key) {
+        case 'Tab':
+          handleTabKey(e)
+          break
+        case 'Escape':
+          handleEscapeKey()
+          break
+        case 'Enter':
+          handleEnterKey()
+          break
+        case 'ArrowUp':
+          handleArrowUpKey(e)
+          break
+        case 'ArrowDown':
+          handleArrowDownKey(e)
+          break
+        default:
+          // No action for other keys
+          break
       }
     },
-    [
-      command,
-      onCommand,
-      onNavigatePrevious,
-      onNavigateNext,
-      enableAutocomplete,
-      autocomplete,
-      setFrozenSuggestions,
-    ],
+    [handleTabKey, handleEscapeKey, handleEnterKey, handleArrowUpKey, handleArrowDownKey],
   )
 
   /**
