@@ -4,8 +4,11 @@ import type {CommandInputRef} from '../../command-input'
 import {useCallback, useEffect, useRef, useState} from 'react'
 import {useTheme} from '@/src/contexts/theme-context'
 import {useCommandHistory} from '@/src/hooks/use-command-history'
+import {commandRegistry} from '@/src/commands'
 
 export const useTerminal = () => {
+  // Get available commands for autocomplete
+  const availableCommands = commandRegistry.getNames()
   const [history, setHistory] = useState<TerminalOutput[]>(() => {
     const welcomeOutput = executeCommand('welcome')
     return [
@@ -108,5 +111,6 @@ export const useTerminal = () => {
     handleCommand,
     navigatePrevious,
     navigateNext,
+    availableCommands,
   }
 }
