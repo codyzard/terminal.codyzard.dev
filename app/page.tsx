@@ -1,12 +1,12 @@
 import {Terminal} from '@/src/components/terminal'
-import {ThemeWrapper} from '@/src/contexts/theme-context'
+import {ProviderAggregation} from './provider-aggregation'
 
 const HomePage = () => {
   return (
     <div className="min-h-screen">
-      <ThemeWrapper>
+      <ProviderAggregation>
         <Terminal />
-      </ThemeWrapper>
+      </ProviderAggregation>
     </div>
   )
 }

@@ -21,9 +21,12 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({children}) => {
-  const [theme, setTheme] = useState<ThemeName>(
-    (localStorage.getItem('terminal-theme') as ThemeName) || 'dark',
-  )
+  const [theme, setTheme] = useState<ThemeName>(() => {
+    if (typeof window === 'undefined') return 'dark'
+
+    const savedTheme = localStorage.getItem('terminal-theme') as ThemeName
+    return savedTheme || 'dark'
+  })
 
   const handleSetTheme = (name: ThemeName) => {
     setTheme(name)
