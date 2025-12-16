@@ -4,12 +4,18 @@ import CommandInput from '../command-input'
 import {useTerminal} from './hooks/use-terminal'
 
 export const Terminal = () => {
-  const {focusInput, history, inputRef, handleCommand, historyEndRef} = useTerminal()
+  const {focusInput, history, inputRef, handleCommand, historyEndRef, navigatePrevious, navigateNext} =
+    useTerminal()
 
   return (
     <div className="h-screen overflow-y-auto font-mono terminal" onClick={focusInput}>
       <CommandHistory history={history} />
-      <CommandInput ref={inputRef} onCommand={handleCommand} />
+      <CommandInput
+        ref={inputRef}
+        onCommand={handleCommand}
+        onNavigatePrevious={navigatePrevious}
+        onNavigateNext={navigateNext}
+      />
       <div ref={historyEndRef} />
     </div>
   )
