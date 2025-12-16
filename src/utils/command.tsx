@@ -1,5 +1,11 @@
-// utils/commands.tsx
-import type {Command} from '../types'
+import type {ReactNode} from 'react'
+import type {ThemeName} from '../contexts/theme-context'
+
+type Command = {
+  name: string
+  description: string
+  execute: (args: string[]) => { content: string | ReactNode; isError?: boolean }
+}
 
 // Dữ liệu cá nhân của bạn
 const userData = {
@@ -110,7 +116,7 @@ const welcomeCommand: Command = {
         <>
           <p className="text-xl text-yellow-400">[ 💻 Initializing Terminal Portfolio ]</p>
           <p className="mt-1 text-sm text-green-500">
-            $ system_info: Hostname: Codyzard.dev | User: Le Hoang Tu (Guest)
+            $ system_info: Hostname: Codyzard.dev | User: Guest
           </p>
           <div className="mt-4">
             <p>Authentication success. Welcome to the **Codyzard.dev** CLI.</p>
@@ -169,6 +175,54 @@ const resumeCommand: Command = {
   },
 }
 
+const themeCommand: Command = {
+  name: 'theme',
+  description: 'Change the terminal theme. Usage: theme <dark|light|hacker>',
+  execute: (args?: string[]) => {
+    const availableThemes: ThemeName[] = ['dark', 'light', 'hacker']
+
+    if (!args || args.length === 0) {
+      return {
+        content: (
+          <>
+            <p>Current available themes:</p>
+            <ul className="list-inside list-disc">
+              {availableThemes.map((theme) => (
+                <li key={theme} className="text-yellow-400">
+                  {theme}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2">Usage: theme {'<theme_name>'}</p>
+          </>
+        ),
+        isError: false,
+      }
+    }
+
+    const newTheme = args[0] as ThemeName
+
+    if (!newTheme || !availableThemes.includes(newTheme)) {
+      return {
+        content: (
+          <>
+            <p className="text-red-500">Error: Invalid theme name.</p>
+            <p>Available themes: **{availableThemes.join(', ')}**</p>
+            <p>Usage: theme {'<theme_name>'}</p>
+          </>
+        ),
+        isError: true,
+      }
+    }
+
+    return {
+      content: `Setting theme to '${newTheme}'...`,
+      specialAction: 'setTheme',
+      themeName: newTheme,
+    }
+  },
+}
+
 // Lệnh CLEAR
 const clearCommand: Command = {
   name: 'clear',
@@ -215,4 +269,5 @@ export const commands: { [key: string]: Command } = {
   skills: skillsCommand,
   clear: clearCommand,
   resume: resumeCommand,
+  theme: themeCommand,
 }

@@ -3,7 +3,8 @@ import type {ReactNode} from 'react'
 export type ExecutionResult = {
   content: string | ReactNode
   isError?: boolean
-  specialAction?: 'clear'
+  specialAction?: 'clear' | 'setTheme'
+  themeName?: string
 }
 
 export type TerminalOutput = {

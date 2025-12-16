@@ -1,9 +1,12 @@
 import {Terminal} from '@/src/components/terminal'
+import {ProviderAggregation} from './provider-aggregation'
 
 const HomePage = () => {
   return (
     <div className="min-h-screen">
-      <Terminal />
+      <ProviderAggregation>
+        <Terminal />
+      </ProviderAggregation>
     </div>
   )
 }

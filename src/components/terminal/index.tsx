@@ -5,6 +5,8 @@ import CommandHistory from '../command-history'
 import type {CommandInputRef} from '../command-input'
 import CommandInput from '../command-input'
 import type {TerminalOutput} from '@/src/types'
+import type {ThemeName} from '@/src/contexts/theme-context'
+import {useTheme} from '@/src/contexts/theme-context'
 
 export const Terminal = () => {
   const [history, setHistory] = useState<TerminalOutput[]>(() => {
@@ -16,6 +18,7 @@ export const Terminal = () => {
   })
   const historyEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<CommandInputRef>(null)
+  const {setTheme} = useTheme()
 
   // Hàm focus input khi click vào Terminal
   const focusInput = () => {
@@ -27,27 +30,35 @@ export const Terminal = () => {
     historyEndRef.current?.scrollIntoView({behavior: 'smooth'})
   }, [history])
 
-  const handleCommand = useCallback((command: string) => {
-    if (!command.trim()) return
+  const handleCommand = useCallback(
+    (command: string) => {
+      if (!command.trim()) return
 
-    // Sử dụng function form để đảm bảo cập nhật state mới nhất
-    setHistory((prev) => {
-      // 1. Xử lý và nhận output
-      const output = executeCommand(command)
+      // Sử dụng function form để đảm bảo cập nhật state mới nhất
+      setHistory((prev) => {
+        // 1. Xử lý và nhận output
+        const output = executeCommand(command)
 
-      // KIỂM TRA HÀNH ĐỘNG ĐẶC BIỆT
-      if (output.specialAction === 'clear') {
-        return [] // Reset history thành mảng rỗng
-      }
+        // Xử lý Lệnh Theme
+        if (output.specialAction === 'setTheme' && output.themeName) {
+          setTheme(output.themeName as ThemeName) // <-- GỌI setTheme
+        }
 
-      // 2. Thêm input và output vào history
-      return [
-        ...prev,
-        {type: 'input', content: command},
-        {type: 'output', content: output.content, isError: output.isError},
-      ]
-    })
-  }, [])
+        // KIỂM TRA HÀNH ĐỘNG ĐẶC BIỆT
+        if (output.specialAction === 'clear') {
+          return [] // Reset history thành mảng rỗng
+        }
+
+        // 2. Thêm input và output vào history
+        return [
+          ...prev,
+          {type: 'input', content: command},
+          {type: 'output', content: output.content, isError: output.isError},
+        ]
+      })
+    },
+    [setTheme],
+  )
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -71,10 +82,7 @@ export const Terminal = () => {
   }, [handleCommand]) // Đảm bảo useEffect chạy lại nếu handleCommand thay đổi (nhưng vì dùng useCallback nên nó sẽ không thay đổi)
 
   return (
-    <div
-      className="h-screen overflow-y-auto bg-gray-900 font-mono text-green-400"
-      onClick={focusInput}
-    >
+    <div className="terminal h-screen overflow-y-auto font-mono" onClick={focusInput}>
       <CommandHistory history={history} />
       <CommandInput ref={inputRef} onCommand={handleCommand} />
       <div ref={historyEndRef} />
