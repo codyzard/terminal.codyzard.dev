@@ -116,7 +116,7 @@ const welcomeCommand: Command = {
         <>
           <p className="text-xl text-yellow-400">[ 💻 Initializing Terminal Portfolio ]</p>
           <p className="mt-1 text-sm text-green-500">
-            $ system_info: Hostname: Codyzard.dev | User: Le Hoang Tu (Guest)
+            $ system_info: Hostname: Codyzard.dev | User: Guest
           </p>
           <div className="mt-4">
             <p>Authentication success. Welcome to the **Codyzard.dev** CLI.</p>
@@ -180,7 +180,27 @@ const themeCommand: Command = {
   description: 'Change the terminal theme. Usage: theme <dark|light|hacker>',
   execute: (args?: string[]) => {
     const availableThemes: ThemeName[] = ['dark', 'light', 'hacker']
-    const newTheme = args?.[0]?.toLowerCase() as ThemeName
+
+    if (!args || args.length === 0) {
+      return {
+        content: (
+          <>
+            <p>Current available themes:</p>
+            <ul className="list-inside list-disc">
+              {availableThemes.map((theme) => (
+                <li key={theme} className="text-yellow-400">
+                  {theme}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2">Usage: theme {'<theme_name>'}</p>
+          </>
+        ),
+        isError: false,
+      }
+    }
+
+    const newTheme = args[0] as ThemeName
 
     if (!newTheme || !availableThemes.includes(newTheme)) {
       return {
