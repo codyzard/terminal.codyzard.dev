@@ -3,6 +3,7 @@ import {executeCommand} from '@/src/utils/command-executor'
 import type {CommandInputRef} from '../../command-input'
 import {useCallback, useEffect, useRef, useState} from 'react'
 import {useTheme} from '@/src/contexts/theme-context'
+import {useCommandHistory} from '@/src/hooks/use-command-history'
 
 export const useTerminal = () => {
   const [history, setHistory] = useState<TerminalOutput[]>(() => {
@@ -15,6 +16,12 @@ export const useTerminal = () => {
   const historyEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<CommandInputRef>(null)
   const {setTheme} = useTheme()
+
+  // Command history navigation
+  const {addToHistory, navigatePrevious, navigateNext} = useCommandHistory({
+    maxSize: 100,
+    persistToStorage: true,
+  })
 
   // focus input when terminal is clicked
   const focusInput = () => {
@@ -45,6 +52,9 @@ export const useTerminal = () => {
 
   const handleCommand = useCallback(
     (command: string) => {
+      // Add to command history (for up/down navigation)
+      addToHistory(command)
+
       if (!command.trim()) {
         setHistory((prev) => [...prev, {type: 'input', content: command}])
         return
@@ -68,7 +78,7 @@ export const useTerminal = () => {
         {type: 'output', content: output.content, isError: output.isError},
       ])
     },
-    [handleSpecialAction],
+    [handleSpecialAction, addToHistory],
   )
 
   // Add global keyboard shortcut for 'clear' command (Cmd + K or Ctrl + K)
@@ -96,5 +106,7 @@ export const useTerminal = () => {
     inputRef,
     focusInput,
     handleCommand,
+    navigatePrevious,
+    navigateNext,
   }
 }
