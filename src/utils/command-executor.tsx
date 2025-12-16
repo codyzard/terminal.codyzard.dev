@@ -1,18 +1,19 @@
 import type {ExecutionResult} from '../types'
-import {commands} from '../commands'
+import {commandRegistry} from '../commands'
 
 export const executeCommand = (fullCommand: string): ExecutionResult => {
   const parts = fullCommand.trim().split(/\s+/)
   const commandName = parts[0].toLowerCase()
   const args = parts.slice(1)
 
-  const command = commands[commandName]
+  // Get command from registry (supports aliases)
+  const command = commandRegistry.get(commandName)
 
   if (command) {
     return command.execute(args)
   }
 
-  // Xử lý lệnh không tồn tại
+  // Handle command not found
   return {
     content: (
       <>

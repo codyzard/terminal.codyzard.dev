@@ -1,4 +1,4 @@
-import type {Command} from '../types'
+import {commandRegistry} from '../utils/command-registry'
 import {blogCommand} from './blog'
 import {clearCommand} from './clear'
 import {contactCommand} from './contact'
@@ -11,20 +11,28 @@ import {summaryCommand} from './summary'
 import {themeCommand} from './theme'
 import {welcomeCommand} from './welcome'
 
-// Export all commands as a registry
-export const commands: {[key: string]: Command} = {
-  help: helpCommand,
-  summary: summaryCommand,
-  contact: contactCommand,
-  welcome: welcomeCommand,
-  skills: skillsCommand,
-  clear: clearCommand,
-  resume: resumeCommand,
-  theme: themeCommand,
-  blog: blogCommand,
-  github: githubCommand,
-  linkedin: linkedinCommand,
-}
+// Register all commands in the registry
+commandRegistry.register(clearCommand, ['cls']) // Add alias 'cls' for clear
+commandRegistry.register(resumeCommand, ['cv']) // Add alias 'cv' for resume
+commandRegistry.register(githubCommand, ['gh']) // Add alias 'gh' for github
+commandRegistry.register(linkedinCommand, ['li']) // Add alias 'li' for linkedin
+
+commandRegistry.registerBulk([
+  helpCommand,
+  summaryCommand,
+  contactCommand,
+  welcomeCommand,
+  skillsCommand,
+  themeCommand,
+  blogCommand,
+])
 
 // Set the registry for help command to access
-setCommandRegistry(commands)
+// Convert to object for backward compatibility
+setCommandRegistry(commandRegistry.toObject())
+
+// Export the registry instance
+export {commandRegistry}
+
+// Export commands object for backward compatibility
+export const commands = commandRegistry.toObject()
