@@ -1,6 +1,7 @@
 'use client'
 import type {ReactNode} from 'react'
-import {createContext, useState, useContext} from 'react'
+import {createContext, useContext} from 'react'
+import {useLocalStorage} from '../hooks/use-local-storage'
 
 export type ThemeName = 'dark' | 'light' | 'hacker'
 
@@ -21,23 +22,9 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({children}) => {
-  const [theme, setTheme] = useState<ThemeName>(() => {
-    if (typeof window === 'undefined') return 'dark'
+  const [theme, setTheme] = useLocalStorage<ThemeName>('terminal-theme', 'dark')
 
-    const savedTheme = localStorage.getItem('terminal-theme') as ThemeName
-    return savedTheme || 'dark'
-  })
-
-  const handleSetTheme = (name: ThemeName) => {
-    setTheme(name)
-    localStorage.setItem('terminal-theme', name)
-  }
-
-  return (
-    <ThemeContext.Provider value={{theme, setTheme: handleSetTheme}}>
-      {children}
-    </ThemeContext.Provider>
-  )
+  return <ThemeContext.Provider value={{theme, setTheme}}>{children}</ThemeContext.Provider>
 }
 
 export const useTheme = () => useContext(ThemeContext)

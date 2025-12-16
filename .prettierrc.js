@@ -1,8 +1,7 @@
-// .prettierrc.js (Đã được chuyển đổi)
-
-// Không cần import Config Type nữa
-// const config: Config = { ...
-
+/**
+ * @see https://prettier.io/docs/configuration
+ * @type {import("prettier").Config}
+ */
 module.exports = {
   semi: false,
   singleQuote: true,
@@ -11,8 +10,7 @@ module.exports = {
   tabWidth: 2,
   arrowParens: 'always',
   bracketSpacing: false,
-  end,
 
   // Plugin Tailwind CSS
-  // plugins: ['prettier-plugin-tailwindcss'],
+  plugins: ['prettier-plugin-tailwindcss'],
 }
