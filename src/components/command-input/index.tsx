@@ -1,15 +1,14 @@
 import type {KeyboardEvent} from 'react'
-import React, {useState, useRef, useEffect, forwardRef, useImperativeHandle} from 'react'
+import {useState, useRef, useEffect, forwardRef, useImperativeHandle} from 'react'
 
-interface Props {
+type Props = {
   onCommand: (command: string) => void
 }
 
-export interface CommandInputRef {
-  focusInput: () => void
+export type CommandInputRef = {
+   focusInput: () => void
 }
 
-// Sử dụng forwardRef để component này có thể nhận ref từ component cha
 const CommandInput = forwardRef<CommandInputRef, Props>(({onCommand}, ref) => {
   const [command, setCommand] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -35,7 +34,7 @@ const CommandInput = forwardRef<CommandInputRef, Props>(({onCommand}, ref) => {
 
   return (
     <div className="flex items-center">
-      <span className="prompt mr-2">user@codyzard:~ $</span>
+      <span className="mr-2 prompt">user@codyzard:~ $</span>
       <input
         ref={inputRef}
         type="text"
@@ -50,5 +49,5 @@ const CommandInput = forwardRef<CommandInputRef, Props>(({onCommand}, ref) => {
   )
 })
 
-CommandInput.displayName = 'CommandInput' // Nên thêm display name khi dùng forwardRef
+CommandInput.displayName = 'CommandInput'
 export default CommandInput

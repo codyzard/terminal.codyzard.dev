@@ -4,7 +4,7 @@ import type {ThemeName} from '../contexts/theme-context'
 type Command = {
   name: string
   description: string
-  execute: (args: string[]) => { content: string | ReactNode; isError?: boolean }
+  execute: (args: string[]) => {content: string | ReactNode; isError?: boolean}
 }
 
 // Dữ liệu cá nhân của bạn
@@ -52,7 +52,7 @@ const summaryCommand: Command = {
     return {
       content: (
         <>
-          <p className="mb-2 text-lg text-white">{userData.title}</p>
+          <p className="mb-2 text-white text-lg">{userData.title}</p>
           <p>
             Hi, I&apos;m **{userData.name}**, a passionate developer specializing in modern web
             technologies like **Next.js, React, and TypeScript**. Now based in Tokyo, Japan
@@ -114,8 +114,8 @@ const welcomeCommand: Command = {
     return {
       content: (
         <>
-          <p className="text-xl text-yellow-400">[ 💻 Initializing Terminal Portfolio ]</p>
-          <p className="mt-1 text-sm text-green-500">
+          <p className="text-yellow-400 text-xl">[ 💻 Initializing Terminal Portfolio ]</p>
+          <p className="mt-1 text-green-500 text-sm">
             $ system_info: Hostname: Codyzard.dev | User: Guest
           </p>
           <div className="mt-4">
@@ -141,9 +141,9 @@ const skillsCommand: Command = {
     return {
       content: (
         <>
-          <p className="mb-2 text-lg text-white">My Tech Stack 💻:</p>
+          <p className="mb-2 text-white text-lg">My Tech Stack 💻:</p>
           {/* Bạn có thể thay đổi nội dung này theo kỹ năng thực tế của mình */}
-          <div className="grid grid-cols-2 gap-y-1">
+          <div className="gap-y-1 grid grid-cols-2">
             <span className="font-bold text-yellow-400">Frontend:</span>{' '}
             <span>React, Next.js, TypeScript, Tailwind CSS</span>
             <span className="font-bold text-yellow-400">Backend:</span>{' '}
@@ -186,7 +186,7 @@ const themeCommand: Command = {
         content: (
           <>
             <p>Current available themes:</p>
-            <ul className="list-inside list-disc">
+            <ul className="list-disc list-inside">
               {availableThemes.map((theme) => (
                 <li key={theme} className="text-yellow-400">
                   {theme}
@@ -237,7 +237,7 @@ const clearCommand: Command = {
 }
 
 // Tập hợp tất cả các lệnh
-export const commands: { [key: string]: Command } = {
+export const commands: {[key: string]: Command} = {
   help: helpCommand,
   summary: summaryCommand,
   blog: {

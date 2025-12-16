@@ -16,5 +16,5 @@ export type TerminalOutput = {
 export type Command = {
   name: string
   description: string
-  execute: (args: string[]) => { content: string | ReactNode; isError?: boolean }
+  execute: (args: string[]) => {content: string | ReactNode; isError?: boolean}
 }
