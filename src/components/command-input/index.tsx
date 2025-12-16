@@ -1,3 +1,4 @@
+import {codyzardUser} from '@/src/utils/users'
 import type {KeyboardEvent} from 'react'
 import {useState, useRef, useEffect, forwardRef, useImperativeHandle} from 'react'
 
@@ -6,7 +7,7 @@ type Props = {
 }
 
 export type CommandInputRef = {
-   focusInput: () => void
+  focusInput: () => void
 }
 
 const CommandInput = forwardRef<CommandInputRef, Props>(({onCommand}, ref) => {
@@ -34,7 +35,7 @@ const CommandInput = forwardRef<CommandInputRef, Props>(({onCommand}, ref) => {
 
   return (
     <div className="flex items-center">
-      <span className="mr-2 prompt">user@codyzard:~ $</span>
+      <span className="mr-2 prompt">{codyzardUser}</span>
       <input
         ref={inputRef}
         type="text"

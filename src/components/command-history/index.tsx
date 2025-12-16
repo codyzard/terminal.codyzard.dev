@@ -1,4 +1,5 @@
 import type {TerminalOutput} from '@/src/types'
+import {codyzardUser} from '@/src/utils/users'
 
 type Props = {
   history: TerminalOutput[]
@@ -11,7 +12,7 @@ const CommandHistory = ({history}: Props) => {
         <div key={index} className="whitespace-pre-wrap">
           {item.type === 'input' ? (
             <div className="flex">
-              <span className="mr-2 text-yellow-500">user@codyzard:~ $</span>
+              <span className="mr-2 text-yellow-500">{codyzardUser}</span>
               <span className="text-white">{item.content}</span>
             </div>
           ) : (

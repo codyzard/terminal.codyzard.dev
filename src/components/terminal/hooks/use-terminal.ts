@@ -2,7 +2,6 @@ import type {TerminalOutput} from '@/src/types'
 import {executeCommand} from '@/src/utils/command-executor'
 import type {CommandInputRef} from '../../command-input'
 import {useCallback, useEffect, useRef, useState} from 'react'
-import type {ThemeName} from '@/src/contexts/theme-context'
 import {useTheme} from '@/src/contexts/theme-context'
 
 export const useTerminal = () => {
@@ -27,6 +26,23 @@ export const useTerminal = () => {
     historyEndRef.current?.scrollIntoView({behavior: 'smooth'})
   }, [history])
 
+  // Handle special actions and return whether to clear history
+  const handleSpecialAction = useCallback(
+    (output: ReturnType<typeof executeCommand>): boolean => {
+      if ('specialAction' in output) {
+        if (output.specialAction === 'setTheme') {
+          setTheme(output.themeName)
+          return false // Don't clear history
+        }
+        if (output.specialAction === 'clear') {
+          return true // Clear history
+        }
+      }
+      return false
+    },
+    [setTheme],
+  )
+
   const handleCommand = useCallback(
     (command: string) => {
       if (!command.trim()) {
@@ -34,30 +50,25 @@ export const useTerminal = () => {
         return
       }
 
-      // Use function form to ensure the latest state update
-      setHistory((prev) => {
-        // 1. Process and get output
-        const output = executeCommand(command)
+      // 1. Execute command and get output
+      const output = executeCommand(command)
 
-        // Handle Theme Command
-        if (output.specialAction === 'setTheme' && output.themeName) {
-          setTheme(output.themeName as ThemeName) // <-- GỌI setTheme
-        }
+      // 2. Handle special actions (side effects)
+      const shouldClear = handleSpecialAction(output)
 
-        // Check for special actions
-        if (output.specialAction === 'clear') {
-          return [] // Reset history to an empty array
-        }
+      // 3. Update history based on action
+      if (shouldClear) {
+        setHistory([])
+        return
+      }
 
-        // 2. Add input and output to history
-        return [
-          ...prev,
-          {type: 'input', content: command},
-          {type: 'output', content: output.content, isError: output.isError},
-        ]
-      })
+      setHistory((prev) => [
+        ...prev,
+        {type: 'input', content: command},
+        {type: 'output', content: output.content, isError: output.isError},
+      ])
     },
-    [setTheme],
+    [handleSpecialAction],
   )
 
   // Add global keyboard shortcut for 'clear' command (Cmd + K or Ctrl + K)

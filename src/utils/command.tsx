@@ -1,11 +1,5 @@
-import type {ReactNode} from 'react'
+import type {Command} from '../types'
 import type {ThemeName} from '../contexts/theme-context'
-
-type Command = {
-  name: string
-  description: string
-  execute: (args: string[]) => {content: string | ReactNode; isError?: boolean}
-}
 
 // Dữ liệu cá nhân của bạn
 const userData = {
