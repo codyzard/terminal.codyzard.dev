@@ -2,6 +2,7 @@ import {commandRegistry} from '../utils/command-registry'
 import {awardsCommand} from './awards'
 import {blogCommand} from './blog'
 import {clearCommand} from './clear'
+import {coffeeCommand} from './coffee/index'
 import {contactCommand} from './contact'
 import {githubCommand} from './github'
 import {helpCommand, setCommandRegistry} from './help'
@@ -37,6 +38,7 @@ commandRegistry.registerBulk([
   blogCommand,
   typingCommand,
   snakeCommand,
+  coffeeCommand,
 ])
 
 // Set the registry for help command to access
