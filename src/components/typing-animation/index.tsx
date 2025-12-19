@@ -152,10 +152,10 @@ const ProgressiveReveal = ({
 
       let currentCount = charCount
       const processedChildren = Array.isArray(children)
-        ? children.map((child) => {
+        ? children.map((child, index) => {
             const result = processNode(child, currentCount)
             currentCount = result.newCount
-            return result.node
+            return <span key={index}>{result.node}</span>
           })
         : (() => {
             const result = processNode(children, currentCount)

@@ -5,6 +5,7 @@ import {contactCommand} from './contact'
 import {githubCommand} from './github'
 import {helpCommand, setCommandRegistry} from './help'
 import {linkedinCommand} from './linkedin'
+import {neofetchCommand} from './neofetch'
 import {resumeCommand} from './resume'
 import {skillsCommand} from './skills'
 import {summaryCommand} from './summary'
@@ -17,6 +18,7 @@ commandRegistry.register(clearCommand, ['cls']) // Add alias 'cls' for clear
 commandRegistry.register(resumeCommand, ['cv']) // Add alias 'cv' for resume
 commandRegistry.register(githubCommand, ['gh']) // Add alias 'gh' for github
 commandRegistry.register(linkedinCommand, ['li']) // Add alias 'li' for linkedin
+commandRegistry.register(neofetchCommand, ['nf', 'fetch']) // Add aliases for neofetch
 
 commandRegistry.registerBulk([
   helpCommand,

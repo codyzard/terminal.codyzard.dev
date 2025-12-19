@@ -1,25 +1,87 @@
 import type {Command} from '../types'
+import {userData} from '../config/user-data'
+
+const WELCOME_ASCII = `
+  ╔═══════════════════════════════════════════════════════════════════╗
+  ║                                                                   ║
+  ║  ██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗ ║
+  ║  ██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝ ║
+  ║  ██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗   ║
+  ║  ██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝   ║
+  ║  ╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗ ║
+  ║   ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝ ║
+  ║                                                                   ║
+  ║               Welcome to Codyzard Terminal v1.0                  ║
+  ╚═══════════════════════════════════════════════════════════════════╝
+`
 
 export const welcomeCommand: Command = {
   name: 'welcome',
   description: 'Display the welcome message.',
   execute: () => {
+    const labelClass = 'text-cyan-400 font-bold'
+    const valueClass = 'text-green-400'
+    const commandClass = 'text-yellow-400 font-bold'
+
     return {
       content: (
-        <>
-          <p className="text-yellow-400 text-xl">[ 💻 Initializing Terminal Portfolio ]</p>
-          <p className="mt-1 text-green-500 text-sm">
-            $ system_info: Hostname: Codyzard.dev | User: Guest
-          </p>
-          <div className="mt-4">
-            <p>Authentication success. Welcome to the **Codyzard.dev** CLI.</p>
-            <p>I&apos;m **Le Hoang Tu**, a developer specializing in modern web stack.</p>
-            <p className="mt-2 text-cyan-400">* Status: Awaiting command input...</p>
+        <div className="font-mono">
+          {/* ASCII Art Header */}
+          <pre className="mb-4 text-cyan-400 text-xs leading-tight">{WELCOME_ASCII}</pre>
+
+          {/* Authentication Status */}
+          <div className="mb-4 text-green-500">
+            <p>✓ Authentication successful</p>
+            <p className="text-gray-400 text-sm">session_id: guest-terminal | user: guest</p>
           </div>
-          <p className="mt-3">
-            Type **&apos;help&apos;** for command directory, or **&apos;summary&apos;** to begin.
-          </p>
-        </>
+
+          {/* Quick Info */}
+          <div className="space-y-1 mb-4">
+            <div className="flex">
+              <span className={`${labelClass} w-36`}>Developer</span>
+              <span className="mr-2 text-gray-500">:</span>
+              <span className={valueClass}>{userData.name}</span>
+            </div>
+            <div className="flex">
+              <span className={`${labelClass} w-36`}>Role</span>
+              <span className="mr-2 text-gray-500">:</span>
+              <span className={valueClass}>{userData.title}</span>
+            </div>
+          </div>
+
+          {/* Quick Start Commands */}
+          <div className="mb-4 pt-3 border-gray-700 border-t">
+            <p className="mb-2 text-white">🚀 Quick Start:</p>
+            <div className="space-y-1 ml-4 text-sm">
+              <p>
+                <span className={commandClass}>help</span>
+                <span className="text-gray-400"> - View all available commands</span>
+              </p>
+              <p>
+                <span className={commandClass}>summary</span>
+                <span className="text-gray-400"> - Learn more about me</span>
+              </p>
+              <p>
+                <span className={commandClass}>neofetch</span>
+                <span className="text-gray-400"> - Display system information</span>
+              </p>
+              <p>
+                <span className={commandClass}>skills</span>
+                <span className="text-gray-400"> - View technical skills</span>
+              </p>
+              <p>
+                <span className={commandClass}>contact</span>
+                <span className="text-gray-400"> - Get in touch</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Tip */}
+          <div className="pt-2 border-gray-700 border-t text-gray-500 text-xs">
+            💡 Tip: Press <kbd className="bg-gray-800 px-1 rounded">Tab</kbd> for command
+            autocomplete, <kbd className="bg-gray-800 px-1 rounded">↑↓</kbd> for history
+          </div>
+        </div>
       ),
     }
   },
