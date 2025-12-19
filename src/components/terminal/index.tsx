@@ -16,7 +16,7 @@ export const Terminal = () => {
   } = useTerminal()
 
   return (
-    <div className="h-screen overflow-y-auto font-mono terminal" onClick={focusInput}>
+    <div className="h-screen overflow-y-auto font-mono terminal p-4 md:p-6 lg:p-8 text-sm md:text-base" onClick={focusInput}>
       <CommandHistory history={history} />
       <CommandInput
         ref={inputRef}
