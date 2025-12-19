@@ -8,6 +8,7 @@ import {linkedinCommand} from './linkedin'
 import {neofetchCommand} from './neofetch'
 import {resumeCommand} from './resume'
 import {skillsCommand} from './skills'
+import {snakeCommand} from './snake'
 import {summaryCommand} from './summary'
 import {themeCommand} from './theme'
 import {typingCommand} from './typing'
@@ -29,6 +30,7 @@ commandRegistry.registerBulk([
   themeCommand,
   blogCommand,
   typingCommand,
+  snakeCommand,
 ])
 
 // Set the registry for help command to access
