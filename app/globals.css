@@ -41,10 +41,38 @@
 .terminal {
   background-color: var(--bg-color);
   color: var(--text-color);
+  /* Disable text selection for better mobile experience */
+  -webkit-user-select: text;
+  user-select: text;
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
 }
+
 /* Cấu hình Prompt */
 .prompt {
   color: var(--prompt-color);
+  /* Prevent prompt from wrapping on mobile */
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 640px) {
+  .terminal {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.5;
+  }
+
+  /* Make buttons more touch-friendly */
+  button {
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Adjust input for mobile */
+  input[type="text"] {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
 }
 
 /* --- Animations --- */

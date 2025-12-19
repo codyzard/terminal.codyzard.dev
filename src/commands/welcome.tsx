@@ -25,26 +25,26 @@ export const welcomeCommand: Command = {
 
     return {
       content: (
-        <div className="font-mono">
+        <div className="font-mono max-w-full">
           {/* ASCII Art Header */}
-          <pre className="mb-4 text-cyan-400 text-xs leading-tight">{WELCOME_ASCII}</pre>
+          <pre className="mb-4 text-cyan-400 text-xs leading-tight overflow-x-auto">{WELCOME_ASCII}</pre>
 
           {/* Authentication Status */}
           <div className="mb-4 text-green-500">
             <p>✓ Authentication successful</p>
-            <p className="text-gray-400 text-sm">session_id: guest-terminal | user: guest</p>
+            <p className="text-gray-400 text-xs sm:text-sm break-all">session_id: guest-terminal | user: guest</p>
           </div>
 
           {/* Quick Info */}
           <div className="space-y-1 mb-4">
-            <div className="flex">
-              <span className={`${labelClass} w-36`}>Developer</span>
-              <span className="mr-2 text-gray-500">:</span>
+            <div className="flex flex-col sm:flex-row">
+              <span className={`${labelClass} sm:w-36`}>Developer</span>
+              <span className="mr-2 text-gray-500 hidden sm:inline">:</span>
               <span className={valueClass}>{userData.name}</span>
             </div>
-            <div className="flex">
-              <span className={`${labelClass} w-36`}>Role</span>
-              <span className="mr-2 text-gray-500">:</span>
+            <div className="flex flex-col sm:flex-row">
+              <span className={`${labelClass} sm:w-36`}>Role</span>
+              <span className="mr-2 text-gray-500 hidden sm:inline">:</span>
               <span className={valueClass}>{userData.title}</span>
             </div>
           </div>
@@ -78,8 +78,13 @@ export const welcomeCommand: Command = {
 
           {/* Tip */}
           <div className="pt-2 border-gray-700 border-t text-gray-500 text-xs">
-            💡 Tip: Press <kbd className="bg-gray-800 px-1 rounded">Tab</kbd> for command
-            autocomplete, <kbd className="bg-gray-800 px-1 rounded">↑↓</kbd> for history
+            <span className="hidden sm:inline">
+              💡 Tip: Press <kbd className="bg-gray-800 px-1 rounded">Tab</kbd> for command
+              autocomplete, <kbd className="bg-gray-800 px-1 rounded">↑↓</kbd> for history
+            </span>
+            <span className="sm:hidden">
+              💡 Tip: Type <span className="text-yellow-400">help</span> to see all commands
+            </span>
           </div>
         </div>
       ),

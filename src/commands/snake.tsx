@@ -106,39 +106,44 @@ const ScoreDisplay = ({score}: {score: number}) => (
   </div>
 )
 
-const GameBoard = ({board}: {board: string[][]}) => (
-  <div
-    className="inline-block bg-black p-2 border-2 border-green-400"
-    style={{width: 'fit-content', maxWidth: '500px'}}
-  >
+const GameBoard = ({board}: {board: string[][]}) => {
+  // Responsive cell size
+  const cellSize = typeof window !== 'undefined' && window.innerWidth < 640 ? 14 : CELL_SIZE
+
+  return (
     <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: `repeat(${BOARD_WIDTH}, ${CELL_SIZE}px)`,
-        gridTemplateRows: `repeat(${BOARD_HEIGHT}, ${CELL_SIZE}px)`,
-        gap: '0',
-      }}
+      className="inline-block bg-black p-1 sm:p-2 border-2 border-green-400 max-w-full overflow-x-auto"
+      style={{width: 'fit-content'}}
     >
-      {board.map((row, y) =>
-        row.map((cell, x) => (
-          <div
-            key={`${y}-${x}`}
-            style={{
-              width: `${CELL_SIZE}px`,
-              height: `${CELL_SIZE}px`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '14px',
-            }}
-          >
-            {cell}
-          </div>
-        )),
-      )}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: `repeat(${BOARD_WIDTH}, ${cellSize}px)`,
+          gridTemplateRows: `repeat(${BOARD_HEIGHT}, ${cellSize}px)`,
+          gap: '0',
+        }}
+      >
+        {board.map((row, y) =>
+          row.map((cell, x) => (
+            <div
+              key={`${y}-${x}`}
+              style={{
+                width: `${cellSize}px`,
+                height: `${cellSize}px`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: cellSize < 20 ? '10px' : '14px',
+              }}
+            >
+              {cell}
+            </div>
+          )),
+        )}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 const GameOverScreen = ({score}: {score: number}) => (
   <div className="mt-4 text-center">
@@ -261,7 +266,7 @@ const SnakeGame = () => {
   const board = renderBoard()
 
   return (
-    <div className="font-mono">
+    <div className="flex flex-col justify-center items-center font-mono">
       <GameTitle />
       <ScoreDisplay score={score} />
       <GameBoard board={board} />
