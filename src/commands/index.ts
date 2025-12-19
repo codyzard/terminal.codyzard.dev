@@ -1,4 +1,5 @@
 import {commandRegistry} from '../utils/command-registry'
+import {awardsCommand} from './awards'
 import {blogCommand} from './blog'
 import {clearCommand} from './clear'
 import {contactCommand} from './contact'
@@ -27,6 +28,7 @@ commandRegistry.registerBulk([
   contactCommand,
   welcomeCommand,
   skillsCommand,
+  awardsCommand,
   themeCommand,
   blogCommand,
   typingCommand,
