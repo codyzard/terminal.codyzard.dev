@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: 'Codyzard.dev',
     images: [
       {
-        url: '/assets/images/profile.png',
+        url: '/assets/images/profile.jpg',
         width: 1200,
         height: 630,
         alt: 'Le Hoang Tu - Software Engineer',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Terminal Portfolio',
     description: "Le Hoang Tu's developer portfolio presented as a command-line interface.",
-    images: ['/assets/images/profile.png'],
+    images: ['/assets/images/profile.jpg'],
     creator: '@codyzard',
     site: '@codyzard',
   },
