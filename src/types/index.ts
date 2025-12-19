@@ -18,11 +18,25 @@ type SetThemeExecutionResult = BaseExecutionResult & {
   themeName: ThemeName
 }
 
+// SetTypingAnimation action - toggle typing animation
+type SetTypingAnimationExecutionResult = BaseExecutionResult & {
+  specialAction: 'setTypingAnimation'
+  enabled: boolean
+}
+
+// SetTypingSpeed action - set typing speed
+type SetTypingSpeedExecutionResult = BaseExecutionResult & {
+  specialAction: 'setTypingSpeed'
+  speed: number
+}
+
 // Union type - easy to extend with new actions
 export type ExecutionResult =
   | BaseExecutionResult
   | ClearExecutionResult
   | SetThemeExecutionResult
+  | SetTypingAnimationExecutionResult
+  | SetTypingSpeedExecutionResult
 
 export type TerminalOutput = {
   id: string
