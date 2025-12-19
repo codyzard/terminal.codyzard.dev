@@ -223,7 +223,7 @@ const WeatherDisplay = ({city}: {city: string}) => {
   return (
     <div className="space-y-4">
       {/* Main Weather Card */}
-      <div className="rounded-lg border border-cyan-400/50 bg-gradient-to-br from-blue-900/50 to-purple-900/50 p-6">
+      <div className="rounded-lg border border-cyan-400/50 bg-linear-to-br from-blue-900/50 to-purple-900/50 p-6">
         {/* Location & Icon */}
         <div className="mb-4 flex items-start justify-between">
           <div>
