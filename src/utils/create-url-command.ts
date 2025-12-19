@@ -1,4 +1,4 @@
-import type {Command} from '../../types'
+import type {Command} from '../types'
 
 /**
  * Factory function to create URL opening commands
@@ -9,11 +9,7 @@ import type {Command} from '../../types'
  * @param resourceName - Human-readable name for the resource (e.g., 'GitHub profile', 'LinkedIn profile')
  * @returns Command object
  */
-export const createUrlCommand = (
-  name: string,
-  url: string,
-  resourceName: string,
-): Command => ({
+export const createUrlCommand = (name: string, url: string, resourceName: string): Command => ({
   name,
   description: `Opens my ${resourceName} in a new tab.`,
   execute: () => {
