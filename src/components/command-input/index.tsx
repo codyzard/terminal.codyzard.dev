@@ -17,15 +17,22 @@ export type CommandInputRef = {
 const CommandInput = forwardRef<CommandInputRef, Props>(
   ({onCommand, onNavigatePrevious, onNavigateNext, availableCommands = []}, ref) => {
     // Use custom hook for all input logic
-    const {command, inputRef, focusInput, handleKeyDown, handleChange, suggestions, showSuggestions} =
-      useCommandInput({
-        onCommand,
-        onNavigatePrevious,
-        onNavigateNext,
-        availableCommands,
-        enableAutocomplete: true,
-        autoFocus: true,
-      })
+    const {
+      command,
+      inputRef,
+      focusInput,
+      handleKeyDown,
+      handleChange,
+      suggestions,
+      showSuggestions,
+    } = useCommandInput({
+      onCommand,
+      onNavigatePrevious,
+      onNavigateNext,
+      availableCommands,
+      enableAutocomplete: true,
+      autoFocus: true,
+    })
 
     // Expose focusInput to parent via ref
     useImperativeHandle(ref, () => ({
@@ -35,7 +42,7 @@ const CommandInput = forwardRef<CommandInputRef, Props>(
     return (
       <div className="relative">
         <div className="flex items-center">
-          <span className="mr-2 prompt">{codyzardUser}</span>
+          <span className="prompt mr-2">{codyzardUser}</span>
           <input
             ref={inputRef}
             type="text"

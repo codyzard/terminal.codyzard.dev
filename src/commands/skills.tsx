@@ -7,8 +7,8 @@ export const skillsCommand: Command = {
     return {
       content: (
         <>
-          <p className="mb-2 text-white text-lg">My Tech Stack 💻:</p>
-          <div className="gap-x-4 gap-y-1 grid grid-cols-[auto_max-content] max-w-md">
+          <p className="mb-2 text-lg text-white">My Tech Stack 💻:</p>
+          <div className="grid max-w-md grid-cols-[auto_max-content] gap-x-4 gap-y-1">
             <span className="font-bold text-yellow-400">Frontend:</span>{' '}
             <span>React, Next.js, TypeScript, Tailwind CSS</span>
             <span className="font-bold text-yellow-400">Backend:</span>{' '}

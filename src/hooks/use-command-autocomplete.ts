@@ -58,7 +58,9 @@ export const useCommandAutocomplete = ({
    * - Multiple matches: show list (toggle on subsequent Tab)
    */
   const handleTab = useCallback(
-    (currentInput: string): {completed: string; shouldOpen: boolean; shouldUpdateInput: boolean} => {
+    (
+      currentInput: string,
+    ): {completed: string; shouldOpen: boolean; shouldUpdateInput: boolean} => {
       const suggestions = getSuggestions(currentInput)
 
       // No suggestions

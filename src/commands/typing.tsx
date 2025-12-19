@@ -9,7 +9,7 @@ export const typingCommand: Command = {
         content: (
           <>
             <p>Typing animation controls:</p>
-            <ul className="ml-4 mt-2 list-disc">
+            <ul className="mt-2 ml-4 list-disc">
               <li>
                 <span className="text-yellow-400">typing on</span> - Enable typing animation
               </li>

@@ -12,7 +12,7 @@ export const themeCommand: Command = {
         content: (
           <>
             <p>Current available themes:</p>
-            <ul className="list-disc list-inside">
+            <ul className="list-inside list-disc">
               {availableThemes.map((theme) => (
                 <li key={theme} className="text-yellow-400">
                   {theme}

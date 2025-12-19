@@ -44,9 +44,9 @@ export const myCommand: Command = {
   description: 'Does something awesome',
   execute: (args) => {
     return {
-      content: 'Hello from my command!'
+      content: 'Hello from my command!',
     }
-  }
+  },
 }
 ```
 
@@ -60,6 +60,7 @@ commandRegistry.register(myCommand, ['mc', 'my'])
 ```
 
 That's it! Your command is now available and can be called with:
+
 - `mycommand`
 - `mc` (alias)
 - `my` (alias)
@@ -68,12 +69,12 @@ That's it! Your command is now available and can be called with:
 
 The following aliases are pre-configured:
 
-| Command | Aliases | Description |
-|---------|---------|-------------|
-| `clear` | `cls` | Clear terminal |
-| `resume` | `cv` | Open resume |
-| `github` | `gh` | Open GitHub profile |
-| `linkedin` | `li` | Open LinkedIn profile |
+| Command    | Aliases | Description           |
+| ---------- | ------- | --------------------- |
+| `clear`    | `cls`   | Clear terminal        |
+| `resume`   | `cv`    | Open resume           |
+| `github`   | `gh`    | Open GitHub profile   |
+| `linkedin` | `li`    | Open LinkedIn profile |
 
 ### Command Registry API
 
@@ -120,10 +121,7 @@ const commandsObj = commandRegistry.toObject()
 
 ```typescript
 // Load commands dynamically based on user permissions
-const adminCommands = [
-  adminCommand,
-  configCommand,
-]
+const adminCommands = [adminCommand, configCommand]
 
 if (user.isAdmin) {
   commandRegistry.registerBulk(adminCommands)
@@ -147,7 +145,7 @@ const installPlugin = (plugin: CommandPlugin) => {
 // Use it
 installPlugin({
   name: 'git-plugin',
-  commands: [gitStatusCommand, gitLogCommand]
+  commands: [gitStatusCommand, gitLogCommand],
 })
 ```
 
@@ -185,6 +183,7 @@ describe('My Command', () => {
 ### From Object to Registry
 
 **Before:**
+
 ```typescript
 export const commands = {
   help: helpCommand,
@@ -193,6 +192,7 @@ export const commands = {
 ```
 
 **After:**
+
 ```typescript
 commandRegistry.register(helpCommand)
 commandRegistry.register(themeCommand)
@@ -203,21 +203,26 @@ export const commands = commandRegistry.toObject()
 ## Benefits
 
 ### 🚀 Scalability
+
 - Add commands without modifying core code
 - Plugin architecture for extensions
 
 ### 🛡️ Type Safety
+
 - Full TypeScript support
 - Compile-time error checking
 
 ### 🔍 Discoverability
+
 - List all commands programmatically
 - Introspection capabilities
 
 ### 🧪 Testability
+
 - Easy to test individual commands
 - Mock registry for testing
 
 ### 📦 Maintainability
+
 - Clear separation of concerns
 - Single responsibility principle

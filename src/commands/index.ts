@@ -13,7 +13,9 @@ import {snakeCommand} from './snake'
 import {summaryCommand} from './summary'
 import {themeCommand} from './theme'
 import {typingCommand} from './typing'
+import {weatherCommand} from './weather'
 import {welcomeCommand} from './welcome'
+import {whoamiCommand} from './whoami'
 
 // Register all commands in the registry
 commandRegistry.register(clearCommand, ['cls']) // Add alias 'cls' for clear
@@ -27,8 +29,10 @@ commandRegistry.registerBulk([
   summaryCommand,
   contactCommand,
   welcomeCommand,
+  whoamiCommand,
   skillsCommand,
   awardsCommand,
+  weatherCommand,
   themeCommand,
   blogCommand,
   typingCommand,

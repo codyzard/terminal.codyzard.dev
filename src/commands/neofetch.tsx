@@ -37,10 +37,10 @@ export const neofetchCommand: Command = {
       content: (
         <div className="font-mono">
           {/* ASCII Art */}
-          <pre className="mb-4 text-yellow-400 text-xs leading-tight">{ASCII_ART}</pre>
+          <pre className="mb-4 text-xs leading-tight text-yellow-400">{ASCII_ART}</pre>
 
           {/* Info Grid */}
-          <div className="gap-1 grid grid-cols-1">
+          <div className="grid grid-cols-1 gap-1">
             {infoLines.map((line, index) => (
               <div key={index} className="flex">
                 {line.label && (
@@ -55,15 +55,15 @@ export const neofetchCommand: Command = {
           </div>
 
           {/* Color Palette */}
-          <div className="flex gap-2 mt-4">
-            <div className="bg-black border border-gray-600 w-8 h-4"></div>
-            <div className="bg-red-500 w-8 h-4"></div>
-            <div className="bg-green-500 w-8 h-4"></div>
-            <div className="bg-yellow-500 w-8 h-4"></div>
-            <div className="bg-blue-500 w-8 h-4"></div>
-            <div className="bg-purple-500 w-8 h-4"></div>
-            <div className="bg-cyan-500 w-8 h-4"></div>
-            <div className="bg-white border border-gray-600 w-8 h-4"></div>
+          <div className="mt-4 flex gap-2">
+            <div className="h-4 w-8 border border-gray-600 bg-black"></div>
+            <div className="h-4 w-8 bg-red-500"></div>
+            <div className="h-4 w-8 bg-green-500"></div>
+            <div className="h-4 w-8 bg-yellow-500"></div>
+            <div className="h-4 w-8 bg-blue-500"></div>
+            <div className="h-4 w-8 bg-purple-500"></div>
+            <div className="h-4 w-8 bg-cyan-500"></div>
+            <div className="h-4 w-8 border border-gray-600 bg-white"></div>
           </div>
         </div>
       ),

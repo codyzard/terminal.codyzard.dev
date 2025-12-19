@@ -1,17 +1,34 @@
+'use client'
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+import {useState} from 'react'
+import type {ReactNode} from 'react'
 import {ThemeProvider, ThemeWrapper} from '@/src/contexts/theme-context'
 import {TypingAnimationProvider} from '@/src/contexts/typing-animation-context'
-import type {ReactNode} from 'react'
 
 type Props = {
   children: ReactNode
 }
 
 export function ProviderAggregation({children}: Props) {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 1000 * 60 * 5, // 5 minutes
+            refetchOnWindowFocus: false,
+          },
+        },
+      }),
+  )
+
   return (
-    <ThemeProvider>
-      <ThemeWrapper>
-        <TypingAnimationProvider>{children}</TypingAnimationProvider>
-      </ThemeWrapper>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <ThemeWrapper>
+          <TypingAnimationProvider>{children}</TypingAnimationProvider>
+        </ThemeWrapper>
+      </ThemeProvider>
+    </QueryClientProvider>
   )
 }

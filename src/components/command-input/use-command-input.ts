@@ -169,14 +169,11 @@ export const useCommandInput = ({
   /**
    * Handle input change
    */
-  const handleChange = useCallback(
-    (value: string) => {
-      setCommand(value)
-      // Keep suggestions open and unchanged while typing
-      // Suggestions stay static until closed by Enter or Escape
-    },
-    [],
-  )
+  const handleChange = useCallback((value: string) => {
+    setCommand(value)
+    // Keep suggestions open and unchanged while typing
+    // Suggestions stay static until closed by Enter or Escape
+  }, [])
 
   return {
     command,
