@@ -441,6 +441,6 @@ MIT License - このプロジェクトを自分のポートフォリオに自由
 
 **Built with ❤️ by Le Hoang Tu**
 
-Portfolio: [codyzard.dev](https://codyzard.dev)
+Portfolio: [terminal.codyzard.dev](https://terminal.codyzard.dev)
 GitHub: [@codyzard](https://github.com/codyzard)
 Location: Tokyo, Japan 🗼
