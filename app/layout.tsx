@@ -62,8 +62,32 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Le Hoang Tu',
+    url: 'https://terminal.codyzard.dev',
+    image: 'https://terminal.codyzard.dev/assets/images/profile.jpg',
+    sameAs: [
+      'https://github.com/codyzard',
+      'https://www.linkedin.com/in/l%C3%AA-ho%C3%A0ng-t%C3%BA-676b89136/',
+    ],
+    jobTitle: 'Software Engineer',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Codyzard.dev',
+    },
+    description: "Le Hoang Tu's developer portfolio presented as a command-line interface.",
+  }
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
+        />
+      </head>
       <body className={`${inter.className} antialiased`}>{children}</body>
     </html>
   )
