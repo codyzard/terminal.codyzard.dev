@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://terminal.codyzard.dev',
-    title: 'Terminal Portfolio',
+    title: 'Le Hoang Tu | Terminal Portfolio',
     description: "Le Hoang Tu's developer portfolio presented as a command-line interface.",
     siteName: 'Codyzard.dev',
     images: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Terminal Portfolio',
+    title: 'Le Hoang Tu | Terminal Portfolio',
     description: "Le Hoang Tu's developer portfolio presented as a command-line interface.",
     images: ['/assets/images/profile.jpg'],
     creator: '@codyzard',
