@@ -9,6 +9,7 @@ import {resumeCommand} from './resume'
 import {skillsCommand} from './skills'
 import {summaryCommand} from './summary'
 import {themeCommand} from './theme'
+import {typingCommand} from './typing'
 import {welcomeCommand} from './welcome'
 
 // Register all commands in the registry
@@ -25,6 +26,7 @@ commandRegistry.registerBulk([
   skillsCommand,
   themeCommand,
   blogCommand,
+  typingCommand,
 ])
 
 // Set the registry for help command to access

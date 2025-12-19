@@ -3,6 +3,7 @@ import {executeCommand} from '@/src/utils/command-executor'
 import type {CommandInputRef} from '../../command-input'
 import {useCallback, useEffect, useRef, useState} from 'react'
 import {useTheme} from '@/src/contexts/theme-context'
+import {useTypingAnimation} from '@/src/contexts/typing-animation-context'
 import {useCommandHistory} from '@/src/hooks/use-command-history'
 import {commandRegistry} from '@/src/commands'
 import {useGlobalKeyboardShortcuts} from './use-global-keyboard-shortcuts'
@@ -33,6 +34,7 @@ export const useTerminal = () => {
   const historyEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<CommandInputRef>(null)
   const {setTheme} = useTheme()
+  const {setEnabled: setTypingEnabled, setSpeed: setTypingSpeed} = useTypingAnimation()
 
   // Command history navigation
   const {addToHistory, navigatePrevious, navigateNext} = useCommandHistory({
@@ -64,14 +66,20 @@ export const useTerminal = () => {
       switch (output.specialAction) {
         case 'setTheme':
           setTheme(output.themeName)
-          return false // Don't clear history
+          return false
         case 'clear':
-          return true // Clear history
+          return true
+        case 'setTypingAnimation':
+          setTypingEnabled(output.enabled)
+          return false
+        case 'setTypingSpeed':
+          setTypingSpeed(output.speed)
+          return false
         default:
           return false
       }
     },
-    [setTheme],
+    [setTheme, setTypingEnabled, setTypingSpeed],
   )
 
   /**
