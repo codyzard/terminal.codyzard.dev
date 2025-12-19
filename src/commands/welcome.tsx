@@ -25,34 +25,38 @@ export const welcomeCommand: Command = {
 
     return {
       content: (
-        <div className="font-mono max-w-full">
+        <div className="max-w-full font-mono">
           {/* ASCII Art Header */}
-          <pre className="mb-4 text-cyan-400 text-xs leading-tight overflow-x-auto">{WELCOME_ASCII}</pre>
+          <pre className="mb-4 overflow-x-auto text-xs leading-tight text-cyan-400">
+            {WELCOME_ASCII}
+          </pre>
 
           {/* Authentication Status */}
           <div className="mb-4 text-green-500">
             <p>✓ Authentication successful</p>
-            <p className="text-gray-400 text-xs sm:text-sm break-all">session_id: guest-terminal | user: guest</p>
+            <p className="text-xs break-all text-gray-400 sm:text-sm">
+              session_id: guest-terminal | user: guest
+            </p>
           </div>
 
           {/* Quick Info */}
-          <div className="space-y-1 mb-4">
+          <div className="mb-4 space-y-1">
             <div className="flex flex-col sm:flex-row">
               <span className={`${labelClass} sm:w-36`}>Developer</span>
-              <span className="mr-2 text-gray-500 hidden sm:inline">:</span>
+              <span className="mr-2 hidden text-gray-500 sm:inline">:</span>
               <span className={valueClass}>{userData.name}</span>
             </div>
             <div className="flex flex-col sm:flex-row">
               <span className={`${labelClass} sm:w-36`}>Role</span>
-              <span className="mr-2 text-gray-500 hidden sm:inline">:</span>
+              <span className="mr-2 hidden text-gray-500 sm:inline">:</span>
               <span className={valueClass}>{userData.title}</span>
             </div>
           </div>
 
           {/* Quick Start Commands */}
-          <div className="mb-4 pt-3 border-gray-700 border-t">
+          <div className="mb-4 border-t border-gray-700 pt-3">
             <p className="mb-2 text-white">🚀 Quick Start:</p>
-            <div className="space-y-1 ml-4 text-sm">
+            <div className="ml-4 space-y-1 text-sm">
               <p>
                 <span className={commandClass}>help</span>
                 <span className="text-gray-400"> - View all available commands</span>
@@ -77,10 +81,10 @@ export const welcomeCommand: Command = {
           </div>
 
           {/* Tip */}
-          <div className="pt-2 border-gray-700 border-t text-gray-500 text-xs">
+          <div className="border-t border-gray-700 pt-2 text-xs text-gray-500">
             <span className="hidden sm:inline">
-              💡 Tip: Press <kbd className="bg-gray-800 px-1 rounded">Tab</kbd> for command
-              autocomplete, <kbd className="bg-gray-800 px-1 rounded">↑↓</kbd> for history
+              💡 Tip: Press <kbd className="rounded bg-gray-800 px-1">Tab</kbd> for command
+              autocomplete, <kbd className="rounded bg-gray-800 px-1">↑↓</kbd> for history
             </span>
             <span className="sm:hidden">
               💡 Tip: Type <span className="text-yellow-400">help</span> to see all commands

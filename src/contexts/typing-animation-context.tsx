@@ -17,8 +17,7 @@ const defaultContextValue: TypingAnimationContextType = {
   setSpeed: () => {},
 }
 
-export const TypingAnimationContext =
-  createContext<TypingAnimationContextType>(defaultContextValue)
+export const TypingAnimationContext = createContext<TypingAnimationContextType>(defaultContextValue)
 
 interface TypingAnimationProviderProps {
   children: ReactNode

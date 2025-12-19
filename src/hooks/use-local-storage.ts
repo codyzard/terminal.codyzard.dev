@@ -8,7 +8,7 @@ type SetValue<T> = T | ((prevValue: T) => T)
  * @param defaultValue - The default value if key doesn't exist
  * @returns [value, setValue] tuple similar to useState
  */
-export const useLocalStorage = <T,>(key: string, defaultValue: T) => {
+export const useLocalStorage = <T>(key: string, defaultValue: T) => {
   // Initialize state with value from localStorage or default
   const [value, setValue] = useState<T>(() => {
     // Return default value during SSR
