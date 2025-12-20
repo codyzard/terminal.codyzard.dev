@@ -80,6 +80,25 @@ docker-compose up -d
 docker-compose down
 ```
 
+#### Testing
+
+```bash
+# Run tests in watch mode
+pnpm test
+
+# Run tests once
+pnpm test:run
+
+# Run tests with UI
+pnpm test:ui
+
+# Run tests with coverage
+pnpm test:coverage
+
+# Run tests in browser mode (experimental)
+pnpm test:browser
+```
+
 ### 📝 Available Commands
 
 | Command    | Aliases       | Description                      |
@@ -246,6 +265,25 @@ docker-compose up -d
 docker-compose down
 ```
 
+#### Testing
+
+```bash
+# Chạy tests ở chế độ watch
+pnpm test
+
+# Chạy tests một lần
+pnpm test:run
+
+# Chạy tests với UI
+pnpm test:ui
+
+# Chạy tests với coverage
+pnpm test:coverage
+
+# Chạy tests ở browser mode (thử nghiệm)
+pnpm test:browser
+```
+
 ### 📝 Các lệnh có sẵn
 
 | Lệnh       | Alias         | Mô tả                         |
@@ -410,6 +448,25 @@ docker-compose up -d
 
 # コンテナを停止
 docker-compose down
+```
+
+#### Testing
+
+```bash
+# watchモードでテストを実行
+pnpm test
+
+# テストを一度実行
+pnpm test:run
+
+# UIでテストを実行
+pnpm test:ui
+
+# カバレッジ付きでテストを実行
+pnpm test:coverage
+
+# ブラウザモードでテストを実行（実験的）
+pnpm test:browser
 ```
 
 ### 📝 利用可能なコマンド
