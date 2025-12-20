@@ -1,0 +1,18 @@
+# Example act configuration file
+# Copy this file to .actrc to use these defaults
+# Customize based on your needs
+
+# Use medium-sized Ubuntu runner image (good balance of speed and compatibility)
+-P ubuntu-latest=catthehacker/ubuntu:runner-latest
+
+# Reuse containers for faster subsequent runs
+--reuse
+
+# Load secrets from .secrets file
+--secret-file .secrets
+
+# Use specific container architecture (useful for M1/M2 Macs)
+--container-architecture linux/amd64
+
+# Verbose output (comment out if you want less noise)
+# -v

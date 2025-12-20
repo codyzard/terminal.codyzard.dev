@@ -91,7 +91,7 @@ describe('CommandRegistry', () => {
   const mockCommand: Command = {
     name: 'test',
     description: 'Test command',
-    action: () => null,
+    execute: () => ({content: 'test'}),
   }
 
   beforeEach(() => {
@@ -141,9 +141,9 @@ describe('CommandRegistry', () => {
   describe('registerBulk', () => {
     it('should register multiple commands at once', () => {
       const commands: Command[] = [
-        {name: 'cmd1', description: 'Command 1', action: () => null},
-        {name: 'cmd2', description: 'Command 2', action: () => null},
-        {name: 'cmd3', description: 'Command 3', action: () => null},
+        {name: 'cmd1', description: 'Command 1', execute: () => ({content: 'test'})},
+        {name: 'cmd2', description: 'Command 2', execute: () => ({content: 'test'})},
+        {name: 'cmd3', description: 'Command 3', execute: () => ({content: 'test'})},
       ]
       registry.registerBulk(commands)
       expect(registry.count()).toBe(3)
@@ -212,8 +212,8 @@ describe('CommandRegistry', () => {
   describe('getAll', () => {
     it('should return all registered commands', () => {
       const commands: Command[] = [
-        {name: 'cmd1', description: 'Command 1', action: () => null},
-        {name: 'cmd2', description: 'Command 2', action: () => null},
+        {name: 'cmd1', description: 'Command 1', execute: () => ({content: 'test'})},
+        {name: 'cmd2', description: 'Command 2', execute: () => ({content: 'test'})},
       ]
       registry.registerBulk(commands)
       const all = registry.getAll()
@@ -230,8 +230,8 @@ describe('CommandRegistry', () => {
   describe('getNames', () => {
     it('should return all command names', () => {
       registry.registerBulk([
-        {name: 'cmd1', description: 'Command 1', action: () => null},
-        {name: 'cmd2', description: 'Command 2', action: () => null},
+        {name: 'cmd1', description: 'Command 1', execute: () => ({content: 'test'})},
+        {name: 'cmd2', description: 'Command 2', execute: () => ({content: 'test'})},
       ])
       const names = registry.getNames()
       expect(names).toHaveLength(2)
@@ -299,8 +299,8 @@ describe('CommandRegistry', () => {
   describe('toObject', () => {
     it('should convert registry to object', () => {
       registry.registerBulk([
-        {name: 'cmd1', description: 'Command 1', action: () => null},
-        {name: 'cmd2', description: 'Command 2', action: () => null},
+        {name: 'cmd1', description: 'Command 1', execute: () => ({content: 'test'})},
+        {name: 'cmd2', description: 'Command 2', execute: () => ({content: 'test'})},
       ])
       const obj = registry.toObject()
       expect(Object.keys(obj)).toHaveLength(2)
