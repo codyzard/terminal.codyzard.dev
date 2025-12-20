@@ -1,4 +1,5 @@
 'use client'
+import {useEffect, useRef} from 'react'
 import type {CoffeeStrength, CoffeeTemp, CoffeeType} from '../types'
 import {ACHIEVEMENTS, COFFEE_FRAMES, COFFEE_TYPES, FRAME_LABELS} from '../constants'
 import {useCoffeeAnimation} from '../hooks/use-coffee-animation'
@@ -14,9 +15,15 @@ type CoffeeDisplayProps = {
 export const CoffeeDisplay = ({coffeeType, strength, temp}: CoffeeDisplayProps) => {
   const {stats, newAchievements, updateStats} = useCoffeeStats(coffeeType, strength, temp)
   const {frameIndex, isComplete} = useCoffeeAnimation(updateStats)
+  const bottomRef = useRef<HTMLDivElement>(null)
 
   const config = COFFEE_TYPES[coffeeType]
   const caffeine = calculateCaffeine(coffeeType, strength, temp)
+
+  // Auto-scroll during animation
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({behavior: 'smooth', block: 'end'})
+  }, [frameIndex, isComplete])
 
   const getMessage = () => {
     const parts = []
@@ -97,6 +104,7 @@ export const CoffeeDisplay = ({coffeeType, strength, temp}: CoffeeDisplayProps) 
           )}
         </div>
       )}
+      <div ref={bottomRef} />
     </div>
   )
 }
