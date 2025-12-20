@@ -66,6 +66,10 @@ export const welcomeCommand: Command = {
                 <span className="text-gray-400"> - Learn more about me</span>
               </p>
               <p>
+                <span className={commandClass}>snake</span>
+                <span className="text-gray-400"> - Play the snake game</span>
+              </p>
+              <p>
                 <span className={commandClass}>neofetch</span>
                 <span className="text-gray-400"> - Display system information</span>
               </p>
