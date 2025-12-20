@@ -43,3 +43,7 @@ next-env.d.ts
 # Memo folder
 memo/
 .env*.local
+
+# act (local CI/CD)
+.secrets
+.actrc

@@ -138,6 +138,28 @@ See [.github/SETUP_CICD.md](.github/SETUP_CICD.md) for detailed setup instructio
 2. Add GitHub secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
 3. Push to GitHub - workflows run automatically!
 
+#### Local CI/CD Testing
+
+Test GitHub Actions workflows locally before pushing using [act](https://github.com/nektos/act):
+
+```bash
+# Install act
+brew install act  # macOS
+
+# Test CI workflow locally
+act -W .github/workflows/ci.yml
+
+# Test specific job
+act -j quality
+act -j test
+
+# Run with secrets
+echo "VERCEL_TOKEN=xxx" > .secrets
+act --secret-file .secrets
+```
+
+See [.github/LOCAL_CICD.md](.github/LOCAL_CICD.md) for detailed local CI/CD guide.
+
 ### 📝 Available Commands
 
 | Command    | Aliases       | Description                      |
@@ -358,6 +380,28 @@ Xem [.github/SETUP_CICD.md](.github/SETUP_CICD.md) để biết hướng dẫn c
 2. Thêm GitHub secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
 3. Push lên GitHub - workflows tự động chạy!
 
+#### Test CI/CD Local
+
+Test GitHub Actions workflows local trước khi push bằng [act](https://github.com/nektos/act):
+
+```bash
+# Cài đặt act
+brew install act  # macOS
+
+# Test CI workflow local
+act -W .github/workflows/ci.yml
+
+# Test job cụ thể
+act -j quality
+act -j test
+
+# Chạy với secrets
+echo "VERCEL_TOKEN=xxx" > .secrets
+act --secret-file .secrets
+```
+
+Xem [.github/LOCAL_CICD.md](.github/LOCAL_CICD.md) để biết hướng dẫn chi tiết về CI/CD local.
+
 ### 📝 Các lệnh có sẵn
 
 | Lệnh       | Alias         | Mô tả                         |
@@ -577,6 +621,28 @@ pnpm test:browser
 1. Vercelアカウントを作成しプロジェクトをリンク
 2. GitHubシークレットを追加: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
 3. GitHubにプッシュ - ワークフローが自動実行されます！
+
+#### ローカルCI/CDテスト
+
+[act](https://github.com/nektos/act)を使用してプッシュ前にGitHub Actionsワークフローをローカルでテストできます:
+
+```bash
+# actをインストール
+brew install act  # macOS
+
+# CIワークフローをローカルでテスト
+act -W .github/workflows/ci.yml
+
+# 特定のジョブをテスト
+act -j quality
+act -j test
+
+# シークレット付きで実行
+echo "VERCEL_TOKEN=xxx" > .secrets
+act --secret-file .secrets
+```
+
+詳細なローカルCI/CDガイドは[.github/LOCAL_CICD.md](.github/LOCAL_CICD.md)をご覧ください。
 
 ### 📝 利用可能なコマンド
 
