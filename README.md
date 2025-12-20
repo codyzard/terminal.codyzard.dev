@@ -64,6 +64,22 @@ pnpm build
 pnpm start
 ```
 
+#### Docker
+
+```bash
+# Build Docker image
+docker build -t codyzard.dev .
+
+# Run container
+docker run -p 3000:3000 codyzard.dev
+
+# Or use docker-compose
+docker-compose up -d
+
+# Stop container
+docker-compose down
+```
+
 ### 📝 Available Commands
 
 | Command    | Aliases       | Description                      |
@@ -214,6 +230,22 @@ pnpm build
 pnpm start
 ```
 
+#### Docker
+
+```bash
+# Build Docker image
+docker build -t codyzard.dev .
+
+# Chạy container
+docker run -p 3000:3000 codyzard.dev
+
+# Hoặc dùng docker-compose
+docker-compose up -d
+
+# Dừng container
+docker-compose down
+```
+
 ### 📝 Các lệnh có sẵn
 
 | Lệnh       | Alias         | Mô tả                         |
@@ -362,6 +394,22 @@ pnpm build
 
 # プロダクションサーバーを起動
 pnpm start
+```
+
+#### Docker
+
+```bash
+# Dockerイメージをビルド
+docker build -t codyzard.dev .
+
+# コンテナを実行
+docker run -p 3000:3000 codyzard.dev
+
+# または docker-compose を使用
+docker-compose up -d
+
+# コンテナを停止
+docker-compose down
 ```
 
 ### 📝 利用可能なコマンド
