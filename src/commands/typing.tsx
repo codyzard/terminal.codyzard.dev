@@ -9,19 +9,19 @@ export const typingCommand: Command = {
         content: (
           <>
             <p>Typing animation controls:</p>
-            <ul className="mt-2 ml-4 list-disc">
+            <ul className='mt-2 ml-4 list-disc'>
               <li>
-                <span className="text-yellow-400">typing on</span> - Enable typing animation
+                <span className='text-yellow-400'>typing on</span> - Enable typing animation
               </li>
               <li>
-                <span className="text-yellow-400">typing off</span> - Disable typing animation
+                <span className='text-yellow-400'>typing off</span> - Disable typing animation
               </li>
               <li>
-                <span className="text-yellow-400">typing speed {'<number>'}</span> - Set typing
+                <span className='text-yellow-400'>typing speed {'<number>'}</span> - Set typing
                 speed (characters per second, default: 50)
               </li>
             </ul>
-            <p className="mt-2">Example: typing speed 100</p>
+            <p className='mt-2'>Example: typing speed 100</p>
           </>
         ),
         isError: false,
@@ -50,7 +50,7 @@ export const typingCommand: Command = {
           return {
             content: (
               <>
-                <span className="text-red-500">Error:</span> Speed value required.
+                <span className='text-red-500'>Error:</span> Speed value required.
                 <br />
                 Usage: typing speed {'<number>'}
               </>
@@ -64,7 +64,7 @@ export const typingCommand: Command = {
           return {
             content: (
               <>
-                <span className="text-red-500">Error:</span> Speed must be a number between 1 and
+                <span className='text-red-500'>Error:</span> Speed must be a number between 1 and
                 500.
               </>
             ),
@@ -82,7 +82,7 @@ export const typingCommand: Command = {
         return {
           content: (
             <>
-              <span className="text-red-500">Error:</span> Invalid action &apos;{action}&apos;.
+              <span className='text-red-500'>Error:</span> Invalid action &apos;{action}&apos;.
               <br />
               Use: typing {'<on|off|speed [number]>'}
             </>

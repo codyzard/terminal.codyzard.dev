@@ -18,14 +18,14 @@ const CommandHistory = ({history}: Props) => {
         const isLastOutput = index === history.length - 1 && item.type === 'output'
 
         return (
-          <div key={item.id} className="whitespace-pre-wrap">
+          <div key={item.id} className='whitespace-pre-wrap'>
             {item.type === 'input' ? (
-              <div className="flex">
-                <span className="prompt mr-2">{codyzardUser}</span>
+              <div className='flex'>
+                <span className='prompt mr-2'>{codyzardUser}</span>
                 {typeof item.content === 'string' ? (
                   <HighlightedCommand command={item.content} />
                 ) : (
-                  <span className="text-white">{item.content}</span>
+                  <span className='text-white'>{item.content}</span>
                 )}
               </div>
             ) : (

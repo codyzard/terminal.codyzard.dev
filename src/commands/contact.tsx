@@ -9,15 +9,15 @@ export const contactCommand: Command = {
       content: (
         <>
           <p>
-            📧 Email: <span className="text-blue-400">{userData.email}</span>
+            📧 Email: <span className='text-blue-400'>{userData.email}</span>
           </p>
           <p>
             🐙 GitHub:{' '}
             <a
               href={userData.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline"
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-blue-400 hover:underline'
             >
               {userData.github}
             </a>
@@ -26,9 +26,9 @@ export const contactCommand: Command = {
             🔗 LinkedIn:{' '}
             <a
               href={userData.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline"
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-blue-400 hover:underline'
             >
               {userData.linkedin}
             </a>

@@ -12,9 +12,9 @@ export const CommandSuggestions = ({suggestions}: Props) => {
   }
 
   return (
-    <div className="mt-2 flex flex-wrap gap-3 px-1">
+    <div className='mt-2 flex flex-wrap gap-3 px-1'>
       {suggestions.map((suggestion) => (
-        <span key={suggestion} className="font-mono text-sm text-gray-300">
+        <span key={suggestion} className='font-mono text-sm text-gray-300'>
           {suggestion}
         </span>
       ))}

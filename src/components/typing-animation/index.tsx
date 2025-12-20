@@ -91,7 +91,7 @@ export const TypingAnimation = ({
     return (
       <span>
         {children.slice(0, displayedLength)}
-        {!isComplete && <span className="animate-pulse">▋</span>}
+        {!isComplete && <span className='animate-pulse'>▋</span>}
       </span>
     )
   }
@@ -100,7 +100,7 @@ export const TypingAnimation = ({
   return (
     <span>
       <ProgressiveReveal currentLength={displayedLength}>{children}</ProgressiveReveal>
-      {!isComplete && <span className="ml-1 animate-pulse">▋</span>}
+      {!isComplete && <span className='ml-1 animate-pulse'>▋</span>}
     </span>
   )
 }

@@ -116,7 +116,7 @@ export const SnakeGame = () => {
   const board = renderBoard()
 
   return (
-    <div className="flex flex-col items-center justify-center font-mono">
+    <div className='flex flex-col items-center justify-center font-mono'>
       <GameTitle />
       <ScoreDisplay score={score} />
       <GameBoard board={board} />
