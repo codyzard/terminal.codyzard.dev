@@ -23,7 +23,9 @@ export const whoamiCommand: Command = {
             </div>
             <div>
               <h2 className="text-2xl font-bold text-cyan-400">{userData.name}</h2>
-              <p className="text-sm text-gray-400">@codyzard</p>
+              <a href={userData.github} className="text-sm text-gray-400">
+                @codyzard
+              </a>
             </div>
           </div>
 
@@ -58,7 +60,7 @@ export const whoamiCommand: Command = {
               🌏 Remote friendly
             </div>
             <div className="rounded bg-gray-700 px-3 py-1 text-xs text-gray-300">
-              🗣️ English, Vietnamese, Japanese
+              📚 English, Vietnamese, Japanese
             </div>
           </div>
         </div>
