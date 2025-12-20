@@ -51,6 +51,33 @@ export const whoamiCommand: Command = {
             <span className="text-gray-400">Currently online and building cool stuff 🚀</span>
           </div>
 
+          {/* Tech Stack */}
+          <div className="mt-4 rounded-lg border border-gray-700 bg-gray-800/50 p-4">
+            <h3 className="mb-3 text-lg font-bold text-cyan-400">💻 Tech Stack</h3>
+            <div className="space-y-2 text-sm">
+              <div>
+                <span className="font-bold text-yellow-400">Frontend:</span>{' '}
+                <span className="text-gray-300">{userData.skills.frontend}</span>
+              </div>
+              <div>
+                <span className="font-bold text-yellow-400">Backend:</span>{' '}
+                <span className="text-gray-300">{userData.skills.backend}</span>
+              </div>
+              <div>
+                <span className="font-bold text-yellow-400">Database:</span>{' '}
+                <span className="text-gray-300">{userData.skills.database}</span>
+              </div>
+              <div>
+                <span className="font-bold text-yellow-400">DevOps/Tools:</span>{' '}
+                <span className="text-gray-300">{userData.skills.devops}</span>
+              </div>
+              <div>
+                <span className="font-bold text-yellow-400">Languages:</span>{' '}
+                <span className="text-gray-300">{userData.skills.languages}</span>
+              </div>
+            </div>
+          </div>
+
           {/* Quick Actions */}
           <div className="mt-4 flex flex-wrap gap-2">
             <div className="rounded bg-gray-700 px-3 py-1 text-xs text-gray-300">
@@ -58,9 +85,6 @@ export const whoamiCommand: Command = {
             </div>
             <div className="rounded bg-gray-700 px-3 py-1 text-xs text-gray-300">
               🌏 Remote friendly
-            </div>
-            <div className="rounded bg-gray-700 px-3 py-1 text-xs text-gray-300">
-              📚 English, Vietnamese, Japanese
             </div>
           </div>
         </div>
