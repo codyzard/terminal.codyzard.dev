@@ -21,14 +21,14 @@ export const themeCommand: Command = {
         content: (
           <>
             <p>Current available themes:</p>
-            <ul className="list-inside list-disc">
+            <ul className='list-inside list-disc'>
               {availableThemes.map((theme) => (
-                <li key={theme} className="text-yellow-400">
+                <li key={theme} className='text-yellow-400'>
                   {theme}
                 </li>
               ))}
             </ul>
-            <p className="mt-2">Usage: theme {'<theme_name>'}</p>
+            <p className='mt-2'>Usage: theme {'<theme_name>'}</p>
           </>
         ),
         isError: false,
@@ -41,7 +41,7 @@ export const themeCommand: Command = {
       return {
         content: (
           <>
-            <p className="text-red-500">Error: Invalid theme name.</p>
+            <p className='text-red-500'>Error: Invalid theme name.</p>
             <p>Available themes: **{availableThemes.join(', ')}**</p>
             <p>Usage: theme {'<theme_name>'}</p>
           </>

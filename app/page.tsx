@@ -3,7 +3,7 @@ import {ProviderAggregation} from './provider-aggregation'
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen">
+    <div className='min-h-screen'>
       <ProviderAggregation>
         <Terminal />
       </ProviderAggregation>

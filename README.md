@@ -25,7 +25,7 @@ A modern, interactive terminal-style portfolio website built with Next.js 16 and
 - **Framework:** Next.js 16 (App Router, Turbopack)
 - **UI:** React 19, TypeScript 5
 - **Styling:** Tailwind CSS 4
-- **Code Quality:** ESLint, Prettier, TypeScript
+- **Code Quality:** Oxlint (Rust-based linter), Prettier with oxc parser, TypeScript
 - **Git Hooks:** Husky, lint-staged
 
 ### 🚀 Getting Started
@@ -110,10 +110,10 @@ src/
 
 #### Code Quality
 
-The project uses pre-commit hooks to ensure code quality:
+The project uses modern, fast tooling with pre-commit hooks to ensure code quality:
 
-- **ESLint** - Linting and auto-fix
-- **Prettier** - Code formatting
+- **Oxlint** - Rust-based linter, 30x faster than ESLint
+- **Prettier with oxc parser** - Fast code formatting with Tailwind CSS class sorting
 - **TypeScript** - Type checking
 
 ```bash
@@ -128,7 +128,12 @@ pnpm format
 
 # Check formatting
 pnpm format:check
+
+# Type check
+pnpm typecheck
 ```
+
+**Performance:** Oxlint completes in ~23ms for 63 files (vs. ESLint's ~2-3s)
 
 #### Refactoring History
 
@@ -170,7 +175,7 @@ Website portfolio kiểu terminal tương tác hiện đại được xây dựn
 - **Framework:** Next.js 16 (App Router, Turbopack)
 - **UI:** React 19, TypeScript 5
 - **Styling:** Tailwind CSS 4
-- **Code Quality:** ESLint, Prettier, TypeScript
+- **Code Quality:** Oxlint (linter viết bằng Rust), Prettier với oxc parser, TypeScript
 - **Git Hooks:** Husky, lint-staged
 
 ### 🚀 Bắt đầu
@@ -255,10 +260,10 @@ src/
 
 #### Chất lượng code
 
-Dự án sử dụng pre-commit hooks để đảm bảo chất lượng code:
+Dự án sử dụng công cụ hiện đại, nhanh với pre-commit hooks để đảm bảo chất lượng code:
 
-- **ESLint** - Linting và tự động fix
-- **Prettier** - Format code
+- **Oxlint** - Linter viết bằng Rust, nhanh hơn ESLint 30 lần
+- **Prettier với oxc parser** - Format code nhanh với sắp xếp class Tailwind CSS
 - **TypeScript** - Type checking
 
 ```bash
@@ -273,7 +278,12 @@ pnpm format
 
 # Kiểm tra formatting
 pnpm format:check
+
+# Type check
+pnpm typecheck
 ```
+
+**Hiệu suất:** Oxlint hoàn thành trong ~23ms cho 63 files (so với ESLint ~2-3s)
 
 #### Lịch sử Refactoring
 
@@ -315,7 +325,7 @@ Next.js 16とReact 19で構築された、モダンでインタラクティブ�
 - **フレームワーク:** Next.js 16 (App Router、Turbopack)
 - **UI:** React 19、TypeScript 5
 - **スタイリング:** Tailwind CSS 4
-- **コード品質:** ESLint、Prettier、TypeScript
+- **コード品質:** Oxlint（Rust製リンター）、Prettier with oxc parser、TypeScript
 - **Git Hooks:** Husky、lint-staged
 
 ### 🚀 はじめに
@@ -400,10 +410,10 @@ src/
 
 #### コード品質
 
-プロジェクトはコード品質を確保するためにプリコミットフックを使用：
+プロジェクトはモダンで高速なツールとプリコミットフックでコード品質を確保：
 
-- **ESLint** - リントと自動修正
-- **Prettier** - コードフォーマット
+- **Oxlint** - Rust製リンター、ESLintより30倍高速
+- **Prettier with oxc parser** - Tailwind CSSクラスソート機能付き高速コードフォーマット
 - **TypeScript** - 型チェック
 
 ```bash
@@ -418,7 +428,12 @@ pnpm format
 
 # フォーマットをチェック
 pnpm format:check
+
+# 型チェック
+pnpm typecheck
 ```
+
+**パフォーマンス:** Oxlintは63ファイルで約23msで完了（ESLintは約2-3秒）
 
 #### リファクタリング履歴
 

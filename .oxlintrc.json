@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "nextjs", "unicorn"],
+  "rules": {
+    "typescript/consistent-type-imports": "error",
+    "typescript/no-unused-vars": "error",
+    "unicorn/filename-case": "error"
+  },
+  "settings": {
+    "react": {
+      "version": "19.2.1"
+    }
+  },
+  "ignorePatterns": [".next/**", "out/**", "build/**", "next-env.d.ts", "node_modules/**"]
+}

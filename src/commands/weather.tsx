@@ -201,7 +201,7 @@ const WeatherDisplay = ({city}: {city: string}) => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center gap-2 text-cyan-400">
+      <div className='flex items-center gap-2 text-cyan-400'>
         <span>⏳</span>
         <span>Fetching weather data for {city}...</span>
       </div>
@@ -210,55 +210,55 @@ const WeatherDisplay = ({city}: {city: string}) => {
 
   if (error) {
     return (
-      <div className="rounded border border-red-500 bg-red-900/20 p-3 text-red-400">
+      <div className='rounded border border-red-500 bg-red-900/20 p-3 text-red-400'>
         ❌ {error instanceof Error ? error.message : 'An error occurred'}
       </div>
     )
   }
 
   if (!weather) {
-    return <div className="text-gray-400">No weather data available.</div>
+    return <div className='text-gray-400'>No weather data available.</div>
   }
 
   return (
-    <div className="space-y-4">
+    <div className='space-y-4'>
       {/* Main Weather Card */}
-      <div className="rounded-lg border border-cyan-400/50 bg-linear-to-br from-blue-900/50 to-purple-900/50 p-6">
+      <div className='rounded-lg border border-cyan-400/50 bg-linear-to-br from-blue-900/50 to-purple-900/50 p-6'>
         {/* Location & Icon */}
-        <div className="mb-4 flex items-start justify-between">
+        <div className='mb-4 flex items-start justify-between'>
           <div>
-            <h3 className="text-2xl font-bold text-white">
+            <h3 className='text-2xl font-bold text-white'>
               📍 {weather.location}, {weather.country}
             </h3>
-            <p className="text-sm text-gray-300">Current Weather</p>
-            <p className="text-xs text-gray-500">
+            <p className='text-sm text-gray-300'>Current Weather</p>
+            <p className='text-xs text-gray-500'>
               Updated: {new Date(dataUpdatedAt).toLocaleTimeString()}
             </p>
           </div>
-          <div className="text-6xl">{weather.icon}</div>
+          <div className='text-6xl'>{weather.icon}</div>
         </div>
 
         {/* Temperature */}
-        <div className="mb-4">
-          <div className="text-5xl font-bold text-cyan-400">{weather.temperature}</div>
-          <div className="text-xl text-gray-300">{weather.condition}</div>
+        <div className='mb-4'>
+          <div className='text-5xl font-bold text-cyan-400'>{weather.temperature}</div>
+          <div className='text-xl text-gray-300'>{weather.condition}</div>
         </div>
 
         {/* Details Grid */}
-        <div className="grid grid-cols-2 gap-4">
-          <div className="rounded-lg bg-black/30 p-3">
-            <div className="text-sm text-gray-400">💧 Humidity</div>
-            <div className="text-xl font-bold text-blue-400">{weather.humidity}</div>
+        <div className='grid grid-cols-2 gap-4'>
+          <div className='rounded-lg bg-black/30 p-3'>
+            <div className='text-sm text-gray-400'>💧 Humidity</div>
+            <div className='text-xl font-bold text-blue-400'>{weather.humidity}</div>
           </div>
-          <div className="rounded-lg bg-black/30 p-3">
-            <div className="text-sm text-gray-400">💨 Wind Speed</div>
-            <div className="text-xl font-bold text-green-400">{weather.windSpeed}</div>
+          <div className='rounded-lg bg-black/30 p-3'>
+            <div className='text-sm text-gray-400'>💨 Wind Speed</div>
+            <div className='text-xl font-bold text-green-400'>{weather.windSpeed}</div>
           </div>
         </div>
       </div>
 
       {/* Tips */}
-      <div className="text-sm text-gray-400">
+      <div className='text-sm text-gray-400'>
         💡 Powered by Open-Meteo • Try: &quot;weather Tokyo&quot;, &quot;weather Hanoi&quot;,
         &quot;weather Paris&quot;
       </div>
@@ -279,11 +279,11 @@ export const weatherCommand: Command = {
     if (!city || city.trim() === '') {
       return {
         content: (
-          <div className="space-y-2">
-            <div className="text-yellow-400">⚠️ Usage: weather &lt;city&gt;</div>
-            <div className="text-gray-400">
-              Example: <span className="text-cyan-400">weather Tokyo</span> or{' '}
-              <span className="text-cyan-400">weather New York</span>
+          <div className='space-y-2'>
+            <div className='text-yellow-400'>⚠️ Usage: weather &lt;city&gt;</div>
+            <div className='text-gray-400'>
+              Example: <span className='text-cyan-400'>weather Tokyo</span> or{' '}
+              <span className='text-cyan-400'>weather New York</span>
             </div>
           </div>
         ),

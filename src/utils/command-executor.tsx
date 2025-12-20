@@ -17,7 +17,7 @@ export const executeCommand = (fullCommand: string): ExecutionResult => {
   return {
     content: (
       <>
-        <span className="text-red-500">Error:</span> Command **&apos;{commandName}&apos;** not
+        <span className='text-red-500'>Error:</span> Command **&apos;{commandName}&apos;** not
         found.
         <br />
         Type **&apos;help&apos;** to see available commands.

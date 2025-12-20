@@ -5,7 +5,7 @@ export const GameBoard = ({board}: {board: string[][]}) => {
 
   return (
     <div
-      className="inline-block max-w-full overflow-x-auto border-2 border-green-400 bg-black p-1 sm:p-2"
+      className='inline-block max-w-full overflow-x-auto border-2 border-green-400 bg-black p-1 sm:p-2'
       style={{width: 'fit-content'}}
     >
       <div

@@ -5,12 +5,13 @@
 module.exports = {
   semi: false,
   singleQuote: true,
+  jsxSingleQuote: true,
   trailingComma: 'all',
   printWidth: 100,
   tabWidth: 2,
   arrowParens: 'always',
   bracketSpacing: false,
 
-  // Plugin Tailwind CSS
-  plugins: ['prettier-plugin-tailwindcss'],
+  // Plugins: oxc for faster parsing, tailwindcss for class sorting
+  plugins: ['@prettier/plugin-oxc', 'prettier-plugin-tailwindcss'],
 }

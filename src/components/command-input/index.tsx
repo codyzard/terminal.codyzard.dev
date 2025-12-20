@@ -40,18 +40,18 @@ const CommandInput = forwardRef<CommandInputRef, Props>(
     }))
 
     return (
-      <div className="relative">
-        <div className="flex items-center">
-          <span className="prompt mr-2">{codyzardUser}</span>
+      <div className='relative'>
+        <div className='flex items-center'>
+          <span className='prompt mr-2'>{codyzardUser}</span>
           <input
             ref={inputRef}
-            type="text"
+            type='text'
             value={command}
             onChange={(e) => handleChange(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="(var(--text-color)) grow border-none bg-transparent outline-none"
-            spellCheck="false"
-            autoComplete="off"
+            className='(var(--text-color)) grow border-none bg-transparent outline-none'
+            spellCheck='false'
+            autoComplete='off'
           />
         </div>
 
