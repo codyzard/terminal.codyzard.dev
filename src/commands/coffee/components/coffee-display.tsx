@@ -1,5 +1,6 @@
 'use client'
 import {useEffect, useRef} from 'react'
+import {useTerminalScroll} from '@/src/contexts/terminal-scroll-context'
 import type {CoffeeStrength, CoffeeTemp, CoffeeType} from '../types'
 import {ACHIEVEMENTS, COFFEE_FRAMES, COFFEE_TYPES, FRAME_LABELS} from '../constants'
 import {useCoffeeAnimation} from '../hooks/use-coffee-animation'
@@ -14,7 +15,11 @@ type CoffeeDisplayProps = {
 
 export const CoffeeDisplay = ({coffeeType, strength, temp}: CoffeeDisplayProps) => {
   const {stats, newAchievements, updateStats} = useCoffeeStats(coffeeType, strength, temp)
-  const {frameIndex, isComplete} = useCoffeeAnimation(updateStats)
+  const {requestScroll} = useTerminalScroll()
+  const {frameIndex, isComplete} = useCoffeeAnimation(() => {
+    updateStats()
+    requestScroll()
+  })
   const bottomRef = useRef<HTMLDivElement>(null)
 
   const config = COFFEE_TYPES[coffeeType]
