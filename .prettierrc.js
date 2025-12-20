@@ -12,6 +12,6 @@ module.exports = {
   arrowParens: 'always',
   bracketSpacing: false,
 
-  // Plugin Tailwind CSS
-  plugins: ['prettier-plugin-tailwindcss'],
+  // Plugins: oxc for faster parsing, tailwindcss for class sorting
+  plugins: ['@prettier/plugin-oxc', 'prettier-plugin-tailwindcss'],
 }
