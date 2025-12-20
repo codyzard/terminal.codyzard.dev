@@ -3,7 +3,14 @@ import type {ReactNode} from 'react'
 import {createContext, useContext} from 'react'
 import {useLocalStorage} from '../hooks/use-local-storage'
 
-export type ThemeName = 'dark' | 'light' | 'hacker'
+export type ThemeName =
+  | 'dark'
+  | 'light'
+  | 'hacker'
+  | 'monokai'
+  | 'dracula'
+  | 'solarized'
+  | 'cyberpunk'
 
 interface ThemeContextType {
   theme: ThemeName

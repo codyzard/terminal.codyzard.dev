@@ -1,11 +1,20 @@
 import type {Command} from '../types'
 import type {ThemeName} from '../contexts/theme-context'
 
-const availableThemes: ThemeName[] = ['dark', 'light', 'hacker']
+const availableThemes: ThemeName[] = [
+  'dark',
+  'light',
+  'hacker',
+  'monokai',
+  'dracula',
+  'solarized',
+  'cyberpunk',
+]
 
 export const themeCommand: Command = {
   name: 'theme',
-  description: 'Change the terminal theme. Usage: theme <dark|light|hacker>',
+  description:
+    'Change the terminal theme. Available: dark, light, hacker, monokai, dracula, solarized, cyberpunk',
   execute: (args?: string[]) => {
     if (!args || args.length === 0) {
       return {

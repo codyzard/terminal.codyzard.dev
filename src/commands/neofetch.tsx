@@ -25,7 +25,6 @@ export const neofetchCommand: Command = {
       {label: 'Location', value: 'Tokyo, Japan'},
       {label: 'Email', value: userData.email},
       {label: 'GitHub', value: userData.github.split('/').pop()},
-      {label: 'Programming Languages', value: 'TypeScript, JavaScript, Python'},
       {label: 'Frontend', value: 'React, Next.js, Tailwind CSS, etc...'},
       {label: 'Backend', value: 'PHP, Go, Hono, Node.js, Express'},
       {label: 'Database', value: 'PostgreSQL, MySQL, DynamoDB'},
