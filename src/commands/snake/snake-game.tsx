@@ -33,11 +33,13 @@ export const SnakeGame = () => {
   const [score, setScore] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const directionRef = useRef<Direction>(INITIAL_DIRECTION)
+  const nextDirectionRef = useRef<Direction | null>(null)
 
   const resetGame = useCallback(() => {
     setSnake(INITIAL_SNAKE)
     setFood(INITIAL_FOOD)
     directionRef.current = INITIAL_DIRECTION
+    nextDirectionRef.current = null
     setGameOver(false)
     setScore(0)
     setIsPlaying(true)
@@ -53,8 +55,8 @@ export const SnakeGame = () => {
       }
 
       const newDirection = getDirectionFromKey(e.key, directionRef.current)
-      if (newDirection) {
-        directionRef.current = newDirection
+      if (newDirection && !nextDirectionRef.current) {
+        nextDirectionRef.current = newDirection
       }
     }
 
@@ -66,6 +68,11 @@ export const SnakeGame = () => {
     if (!isPlaying || gameOver) return
 
     const gameLoop = setInterval(() => {
+      if (nextDirectionRef.current) {
+        directionRef.current = nextDirectionRef.current
+        nextDirectionRef.current = null
+      }
+
       setSnake((prevSnake) => {
         const head = prevSnake[0]
         const newHead = getNextPosition(head, directionRef.current)
