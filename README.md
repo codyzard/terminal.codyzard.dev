@@ -1,5 +1,9 @@
 # 🖥️ Codyzard.dev - Terminal Portfolio
 
+[![CI](https://github.com/codyzard/codyzard.dev/actions/workflows/ci.yml/badge.svg)](https://github.com/codyzard/codyzard.dev/actions/workflows/ci.yml)
+[![Deploy Production](https://github.com/codyzard/codyzard.dev/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/codyzard/codyzard.dev/actions/workflows/deploy-production.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 [English](#english) | [Tiếng Việt](#tiếng-việt) | [日本語](#日本語)
 
 ---
@@ -25,8 +29,11 @@ A modern, interactive terminal-style portfolio website built with Next.js 16 and
 - **Framework:** Next.js 16 (App Router, Turbopack)
 - **UI:** React 19, TypeScript 5
 - **Styling:** Tailwind CSS 4
+- **Testing:** Vitest, React Testing Library, 86+ tests
 - **Code Quality:** Oxlint (Rust-based linter), Prettier with oxc parser, TypeScript
 - **Git Hooks:** Husky, lint-staged
+- **CI/CD:** GitHub Actions, Vercel
+- **Deployment:** Vercel (Preview & Production)
 
 ### 🚀 Getting Started
 
@@ -98,6 +105,38 @@ pnpm test:coverage
 # Run tests in browser mode (experimental)
 pnpm test:browser
 ```
+
+### 🚀 CI/CD & Deployment
+
+This project uses **GitHub Actions** for continuous integration and **Vercel** for deployment.
+
+#### Automated Workflows
+
+- **CI Pipeline** - Runs on every push and PR
+  - Code linting and formatting checks
+  - TypeScript type checking
+  - Unit tests execution
+  - Build verification
+
+- **Preview Deployments** - Automatic for every PR
+  - Deploys to Vercel preview environment
+  - Comment on PR with preview URL
+  - Test changes before merging
+
+- **Production Deployments** - Automatic on merge to `main`
+  - Deploys to production environment
+  - Zero-downtime deployment
+  - Automatic rollback on failure
+
+#### Setup CI/CD
+
+See [.github/SETUP_CICD.md](.github/SETUP_CICD.md) for detailed setup instructions.
+
+**Quick Start:**
+
+1. Create Vercel account and link project
+2. Add GitHub secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
+3. Push to GitHub - workflows run automatically!
 
 ### 📝 Available Commands
 
@@ -210,8 +249,11 @@ Website portfolio kiểu terminal tương tác hiện đại được xây dựn
 - **Framework:** Next.js 16 (App Router, Turbopack)
 - **UI:** React 19, TypeScript 5
 - **Styling:** Tailwind CSS 4
+- **Testing:** Vitest, React Testing Library, 86+ tests
 - **Code Quality:** Oxlint (linter viết bằng Rust), Prettier với oxc parser, TypeScript
 - **Git Hooks:** Husky, lint-staged
+- **CI/CD:** GitHub Actions, Vercel
+- **Deployment:** Vercel (Preview & Production)
 
 ### 🚀 Bắt đầu
 
@@ -283,6 +325,38 @@ pnpm test:coverage
 # Chạy tests ở browser mode (thử nghiệm)
 pnpm test:browser
 ```
+
+### 🚀 CI/CD & Deployment
+
+Dự án sử dụng **GitHub Actions** cho continuous integration và **Vercel** cho deployment.
+
+#### Quy trình tự động
+
+- **CI Pipeline** - Chạy mỗi khi push và PR
+  - Kiểm tra linting và formatting
+  - Type checking với TypeScript
+  - Chạy unit tests
+  - Kiểm tra build
+
+- **Preview Deployments** - Tự động cho mỗi PR
+  - Deploy lên Vercel preview environment
+  - Comment link preview trên PR
+  - Test thay đổi trước khi merge
+
+- **Production Deployments** - Tự động khi merge vào `main`
+  - Deploy lên production environment
+  - Zero-downtime deployment
+  - Tự động rollback khi lỗi
+
+#### Cài đặt CI/CD
+
+Xem [.github/SETUP_CICD.md](.github/SETUP_CICD.md) để biết hướng dẫn chi tiết.
+
+**Bắt đầu nhanh:**
+
+1. Tạo tài khoản Vercel và link project
+2. Thêm GitHub secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
+3. Push lên GitHub - workflows tự động chạy!
 
 ### 📝 Các lệnh có sẵn
 
@@ -395,8 +469,11 @@ Next.js 16とReact 19で構築された、モダンでインタラクティブ�
 - **フレームワーク:** Next.js 16 (App Router、Turbopack)
 - **UI:** React 19、TypeScript 5
 - **スタイリング:** Tailwind CSS 4
+- **テスト:** Vitest、React Testing Library、86+ tests
 - **コード品質:** Oxlint（Rust製リンター）、Prettier with oxc parser、TypeScript
 - **Git Hooks:** Husky、lint-staged
+- **CI/CD:** GitHub Actions、Vercel
+- **デプロイ:** Vercel（Preview & Production）
 
 ### 🚀 はじめに
 
@@ -468,6 +545,38 @@ pnpm test:coverage
 # ブラウザモードでテストを実行（実験的）
 pnpm test:browser
 ```
+
+### 🚀 CI/CD & デプロイ
+
+このプロジェクトは**GitHub Actions**でCIを、**Vercel**でデプロイを行います。
+
+#### 自動化ワークフロー
+
+- **CIパイプライン** - プッシュとPRごとに実行
+  - リントとフォーマットチェック
+  - TypeScriptの型チェック
+  - ユニットテストの実行
+  - ビルド検証
+
+- **プレビューデプロイ** - PRごとに自動実行
+  - Vercelプレビュー環境へデプロイ
+  - PRにプレビューURLをコメント
+  - マージ前に変更をテスト
+
+- **プロダクションデプロイ** - `main`へのマージ時に自動実行
+  - プロダクション環境へデプロイ
+  - ゼロダウンタイムデプロイ
+  - 失敗時の自動ロールバック
+
+#### CI/CDセットアップ
+
+詳細な手順は[.github/SETUP_CICD.md](.github/SETUP_CICD.md)をご覧ください。
+
+**クイックスタート:**
+
+1. Vercelアカウントを作成しプロジェクトをリンク
+2. GitHubシークレットを追加: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
+3. GitHubにプッシュ - ワークフローが自動実行されます！
 
 ### 📝 利用可能なコマンド
 
