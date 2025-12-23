@@ -2,6 +2,7 @@
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {useState} from 'react'
 import type {ReactNode} from 'react'
+import {AudioProvider} from '@/src/contexts/audio-context'
 import {MatrixProvider} from '@/src/contexts/matrix-context'
 import {ThemeProvider, ThemeWrapper} from '@/src/contexts/theme-context'
 import {TypingAnimationProvider} from '@/src/contexts/typing-animation-context'
@@ -28,7 +29,9 @@ export function ProviderAggregation({children}: Props) {
       <ThemeProvider>
         <ThemeWrapper>
           <TypingAnimationProvider>
-            <MatrixProvider>{children}</MatrixProvider>
+            <MatrixProvider>
+              <AudioProvider>{children}</AudioProvider>
+            </MatrixProvider>
           </TypingAnimationProvider>
         </ThemeWrapper>
       </ThemeProvider>
