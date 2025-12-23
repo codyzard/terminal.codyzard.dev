@@ -1,5 +1,6 @@
 import {codyzardUser} from '@/src/utils/users'
 import {forwardRef, useImperativeHandle} from 'react'
+import {useTypingSound} from '@/src/hooks/use-typing-sound'
 import {useCommandInput} from './use-command-input'
 import {CommandSuggestions} from './command-suggestions'
 
@@ -34,6 +35,13 @@ const CommandInput = forwardRef<CommandInputRef, Props>(
       autoFocus: true,
     })
 
+    const {playTypingSound} = useTypingSound()
+
+    const handleChangeWithSound = (value: string) => {
+      handleChange(value)
+      playTypingSound()
+    }
+
     // Expose focusInput to parent via ref
     useImperativeHandle(ref, () => ({
       focusInput,
@@ -47,7 +55,7 @@ const CommandInput = forwardRef<CommandInputRef, Props>(
             ref={inputRef}
             type='text'
             value={command}
-            onChange={(e) => handleChange(e.target.value)}
+            onChange={(e) => handleChangeWithSound(e.target.value)}
             onKeyDown={handleKeyDown}
             className='(var(--text-color)) grow border-none bg-transparent outline-none'
             spellCheck='false'

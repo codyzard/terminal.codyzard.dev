@@ -15,12 +15,15 @@ A modern, interactive terminal-style portfolio website built with Next.js 16 and
 ### ✨ Features
 
 - **Interactive Terminal Interface** - Unix-like command-line experience
-- **Command System** - 14+ built-in commands with aliases
+- **Command System** - 19+ built-in commands with aliases
 - **Tab Autocomplete** - Smart command suggestions
 - **Command History** - Navigate through previous commands with ↑/↓
 - **Theme Switching** - Multiple color schemes (matrix, dracula, monokai, etc.)
+- **Matrix Effect** - Toggleable digital rain background with 404 page
+- **Audio Effects** - Retro typing sounds with Web Audio API
 - **Typing Animation** - Configurable typing speed (1-500 chars/sec)
 - **Snake Game** - Classic snake game built into the terminal
+- **Coffee Command** - Brew virtual coffee with stats tracking
 - **Mobile Responsive** - Optimized for all screen sizes
 - **Pre-commit Hooks** - Automated linting, type-checking, and formatting
 
@@ -162,44 +165,71 @@ See [.github/LOCAL_CICD.md](.github/LOCAL_CICD.md) for detailed local CI/CD guid
 
 ### 📝 Available Commands
 
-| Command    | Aliases       | Description                      |
-| ---------- | ------------- | -------------------------------- |
-| `help`     | -             | Show all available commands      |
-| `welcome`  | -             | Display welcome message          |
-| `summary`  | -             | Show professional summary        |
-| `skills`   | -             | List technical skills            |
-| `contact`  | -             | Display contact information      |
-| `neofetch` | `nf`, `fetch` | System information display       |
-| `resume`   | `cv`          | Download resume                  |
-| `github`   | `gh`          | Open GitHub profile              |
-| `linkedin` | `li`          | Open LinkedIn profile            |
-| `blog`     | -             | Open development blog            |
-| `theme`    | -             | Change terminal theme            |
-| `typing`   | -             | Configure typing animation speed |
-| `snake`    | -             | Play Snake game                  |
-| `clear`    | `cls`         | Clear terminal screen            |
+| Command    | Aliases       | Description                         |
+| ---------- | ------------- | ----------------------------------- |
+| `help`     | -             | Show all available commands         |
+| `welcome`  | -             | Display welcome message             |
+| `summary`  | -             | Show professional summary           |
+| `skills`   | -             | List technical skills               |
+| `awards`   | -             | Display awards and achievements     |
+| `contact`  | -             | Display contact information         |
+| `weather`  | -             | Check current weather               |
+| `neofetch` | `nf`, `fetch` | System information display          |
+| `resume`   | `cv`          | Download resume                     |
+| `github`   | `gh`          | Open GitHub profile                 |
+| `linkedin` | `li`          | Open LinkedIn profile               |
+| `blog`     | -             | Open development blog               |
+| `theme`    | -             | Change terminal theme               |
+| `typing`   | -             | Configure typing animation speed    |
+| `matrix`   | -             | Toggle Matrix digital rain effect   |
+| `audio`    | -             | Toggle audio effects (typing sound) |
+| `coffee`   | -             | Brew virtual coffee                 |
+| `snake`    | -             | Play Snake game                     |
+| `clear`    | `cls`         | Clear terminal screen               |
 
 ### 📁 Project Structure
 
 ```
 src/
-├── app/                    # Next.js App Router
-├── commands/               # Terminal commands
-│   ├── snake/             # Snake game (refactored)
-│   │   ├── components/    # UI components
-│   │   ├── game-logic.ts  # Game logic
-│   │   ├── types.ts       # Types & constants
-│   │   └── snake-game.tsx # Main game component
-│   ├── *.tsx              # Individual commands
-│   └── index.ts           # Command registry
-├── components/            # Shared components
-│   ├── command-input/    # Command input component
-│   └── terminal/         # Terminal component
-├── contexts/             # React contexts
-├── hooks/                # Custom React hooks
-├── types/                # TypeScript types
-├── utils/                # Utility functions
-└── config/               # Configuration files
+├── app/                       # Next.js App Router
+├── commands/                  # Terminal commands
+│   ├── audio/                # Audio command (refactored)
+│   │   ├── audio-toggle.tsx  # Toggle component
+│   │   ├── use-audio-toggle.ts # Toggle hook
+│   │   └── index.tsx         # Command export
+│   ├── coffee/               # Coffee command (refactored)
+│   │   ├── components/       # Coffee UI components
+│   │   ├── types.ts          # Types & constants
+│   │   └── index.tsx         # Command export
+│   ├── matrix/               # Matrix command (refactored)
+│   │   ├── matrix-toggle.tsx # Toggle component
+│   │   ├── use-matrix-toggle.ts # Toggle hook
+│   │   └── index.tsx         # Command export
+│   ├── snake/                # Snake game (refactored)
+│   │   ├── components/       # Game UI components
+│   │   ├── game-logic.ts     # Game logic
+│   │   ├── types.ts          # Types & constants
+│   │   └── snake-game.tsx    # Main game component
+│   ├── *.tsx                 # Individual commands
+│   └── index.ts              # Command registry
+├── components/               # Shared components
+│   ├── command-input/       # Command input component
+│   ├── matrix-rain/         # Matrix rain effect
+│   │   ├── index.tsx        # Main component
+│   │   ├── matrix-constants.ts # Constants
+│   │   └── use-matrix-animation.ts # Animation hook
+│   └── terminal/            # Terminal component
+├── contexts/                # React contexts
+│   ├── audio-context.tsx    # Audio state management
+│   ├── matrix-context.tsx   # Matrix state management
+│   └── ...                  # Other contexts
+├── hooks/                   # Custom React hooks
+│   ├── use-is-mounted.ts    # Client mount detection
+│   ├── use-typing-sound.ts  # Typing sound effect
+│   └── ...                  # Other hooks
+├── types/                   # TypeScript types
+├── utils/                   # Utility functions
+└── config/                  # Configuration files
 ```
 
 ### 🔧 Development
@@ -244,6 +274,20 @@ pnpm typecheck
 - Improved maintainability and testability
 - Follows kebab-case naming convention
 
+**Phase 3: Matrix Rain Component** ✅
+
+- Extracted MatrixRain component for reuse (404 page + terminal background)
+- Created matrix context with localStorage for state persistence
+- Reduced MatrixRain component from 102 lines to 25 lines (77% reduction)
+- Separated concerns: constants, animation hook, background component
+
+**Phase 4: Audio & Matrix Commands** ✅
+
+- Applied clean architecture pattern to audio and matrix commands
+- Separated logic (custom hooks) from presentation (components)
+- Organized into folders with clear structure: hook + component + index
+- Consistent pattern across complex commands
+
 ### 📄 License
 
 MIT License - feel free to use this project for your own portfolio!
@@ -257,12 +301,15 @@ Website portfolio kiểu terminal tương tác hiện đại được xây dựn
 ### ✨ Tính năng
 
 - **Giao diện Terminal Tương tác** - Trải nghiệm dòng lệnh giống Unix
-- **Hệ thống Lệnh** - Hơn 14 lệnh tích hợp với các alias
+- **Hệ thống Lệnh** - Hơn 19 lệnh tích hợp với các alias
 - **Tự động hoàn thành Tab** - Gợi ý lệnh thông minh
 - **Lịch sử Lệnh** - Điều hướng qua các lệnh trước với ↑/↓
 - **Đổi Theme** - Nhiều bảng màu (matrix, dracula, monokai, v.v.)
+- **Hiệu ứng Matrix** - Background mưa chữ Matrix với trang 404
+- **Âm thanh** - Hiệu ứng gõ phím retro với Web Audio API
 - **Hiệu ứng Gõ chữ** - Tốc độ gõ có thể điều chỉnh (1-500 ký tự/giây)
 - **Game Rắn săn mồi** - Game rắn cổ điển tích hợp trong terminal
+- **Lệnh Coffee** - Pha cà phê ảo với thống kê
 - **Responsive Mobile** - Tối ưu cho mọi kích thước màn hình
 - **Pre-commit Hooks** - Tự động lint, type-check và format
 
@@ -404,44 +451,71 @@ Xem [.github/LOCAL_CICD.md](.github/LOCAL_CICD.md) để biết hướng dẫn c
 
 ### 📝 Các lệnh có sẵn
 
-| Lệnh       | Alias         | Mô tả                         |
-| ---------- | ------------- | ----------------------------- |
-| `help`     | -             | Hiển thị tất cả lệnh          |
-| `welcome`  | -             | Hiển thị thông điệp chào mừng |
-| `summary`  | -             | Hiển thị tóm tắt chuyên môn   |
-| `skills`   | -             | Liệt kê kỹ năng kỹ thuật      |
-| `contact`  | -             | Hiển thị thông tin liên hệ    |
-| `neofetch` | `nf`, `fetch` | Hiển thị thông tin hệ thống   |
-| `resume`   | `cv`          | Tải xuống CV                  |
-| `github`   | `gh`          | Mở trang GitHub               |
-| `linkedin` | `li`          | Mở trang LinkedIn             |
-| `blog`     | -             | Mở blog phát triển            |
-| `theme`    | -             | Đổi theme terminal            |
-| `typing`   | -             | Cấu hình tốc độ gõ chữ        |
-| `snake`    | -             | Chơi game Rắn săn mồi         |
-| `clear`    | `cls`         | Xóa màn hình terminal         |
+| Lệnh       | Alias         | Mô tả                              |
+| ---------- | ------------- | ---------------------------------- |
+| `help`     | -             | Hiển thị tất cả lệnh               |
+| `welcome`  | -             | Hiển thị thông điệp chào mừng      |
+| `summary`  | -             | Hiển thị tóm tắt chuyên môn        |
+| `skills`   | -             | Liệt kê kỹ năng kỹ thuật           |
+| `awards`   | -             | Hiển thị giải thưởng và thành tích |
+| `contact`  | -             | Hiển thị thông tin liên hệ         |
+| `weather`  | -             | Kiểm tra thời tiết hiện tại        |
+| `neofetch` | `nf`, `fetch` | Hiển thị thông tin hệ thống        |
+| `resume`   | `cv`          | Tải xuống CV                       |
+| `github`   | `gh`          | Mở trang GitHub                    |
+| `linkedin` | `li`          | Mở trang LinkedIn                  |
+| `blog`     | -             | Mở blog phát triển                 |
+| `theme`    | -             | Đổi theme terminal                 |
+| `typing`   | -             | Cấu hình tốc độ gõ chữ             |
+| `matrix`   | -             | Bật/tắt hiệu ứng Matrix            |
+| `audio`    | -             | Bật/tắt âm thanh (tiếng gõ phím)   |
+| `coffee`   | -             | Pha cà phê ảo                      |
+| `snake`    | -             | Chơi game Rắn săn mồi              |
+| `clear`    | `cls`         | Xóa màn hình terminal              |
 
 ### 📁 Cấu trúc dự án
 
 ```
 src/
-├── app/                    # Next.js App Router
-├── commands/               # Các lệnh terminal
-│   ├── snake/             # Game rắn (đã refactor)
-│   │   ├── components/    # Các UI components
-│   │   ├── game-logic.ts  # Logic game
-│   │   ├── types.ts       # Types & constants
-│   │   └── snake-game.tsx # Component game chính
-│   ├── *.tsx              # Các lệnh riêng lẻ
-│   └── index.ts           # Command registry
-├── components/            # Shared components
-│   ├── command-input/    # Command input component
-│   └── terminal/         # Terminal component
-├── contexts/             # React contexts
-├── hooks/                # Custom React hooks
-├── types/                # TypeScript types
-├── utils/                # Utility functions
-└── config/               # Configuration files
+├── app/                       # Next.js App Router
+├── commands/                  # Các lệnh terminal
+│   ├── audio/                # Lệnh audio (đã refactor)
+│   │   ├── audio-toggle.tsx  # Component toggle
+│   │   ├── use-audio-toggle.ts # Hook toggle
+│   │   └── index.tsx         # Export lệnh
+│   ├── coffee/               # Lệnh coffee (đã refactor)
+│   │   ├── components/       # UI components coffee
+│   │   ├── types.ts          # Types & constants
+│   │   └── index.tsx         # Export lệnh
+│   ├── matrix/               # Lệnh matrix (đã refactor)
+│   │   ├── matrix-toggle.tsx # Component toggle
+│   │   ├── use-matrix-toggle.ts # Hook toggle
+│   │   └── index.tsx         # Export lệnh
+│   ├── snake/                # Game rắn (đã refactor)
+│   │   ├── components/       # UI components game
+│   │   ├── game-logic.ts     # Logic game
+│   │   ├── types.ts          # Types & constants
+│   │   └── snake-game.tsx    # Component game chính
+│   ├── *.tsx                 # Các lệnh riêng lẻ
+│   └── index.ts              # Command registry
+├── components/               # Shared components
+│   ├── command-input/       # Command input component
+│   ├── matrix-rain/         # Hiệu ứng Matrix rain
+│   │   ├── index.tsx        # Component chính
+│   │   ├── matrix-constants.ts # Constants
+│   │   └── use-matrix-animation.ts # Hook animation
+│   └── terminal/            # Terminal component
+├── contexts/                # React contexts
+│   ├── audio-context.tsx    # Quản lý state audio
+│   ├── matrix-context.tsx   # Quản lý state matrix
+│   └── ...                  # Contexts khác
+├── hooks/                   # Custom React hooks
+│   ├── use-is-mounted.ts    # Phát hiện client mount
+│   ├── use-typing-sound.ts  # Hiệu ứng tiếng gõ phím
+│   └── ...                  # Hooks khác
+├── types/                   # TypeScript types
+├── utils/                   # Utility functions
+└── config/                  # Configuration files
 ```
 
 ### 🔧 Phát triển
@@ -486,6 +560,20 @@ pnpm typecheck
 - Cải thiện khả năng maintain và test
 - Tuân theo quy ước kebab-case
 
+**Phase 3: Component MatrixRain** ✅
+
+- Tách MatrixRain component để tái sử dụng (trang 404 + terminal background)
+- Tạo matrix context với localStorage để lưu state
+- Giảm MatrixRain component từ 102 dòng xuống 25 dòng (giảm 77%)
+- Tách rõ: constants, animation hook, background component
+
+**Phase 4: Lệnh Audio & Matrix** ✅
+
+- Áp dụng clean architecture cho lệnh audio và matrix
+- Tách logic (custom hooks) khỏi presentation (components)
+- Tổ chức thành folders với cấu trúc rõ ràng: hook + component + index
+- Pattern nhất quán cho các lệnh phức tạp
+
 ### 📄 License
 
 MIT License - thoải mái sử dụng dự án này cho portfolio của bạn!
@@ -499,12 +587,15 @@ Next.js 16とReact 19で構築された、モダンでインタラクティブ�
 ### ✨ 機能
 
 - **インタラクティブなターミナルインターフェース** - Unix風のコマンドライン体験
-- **コマンドシステム** - 14以上の組み込みコマンドとエイリアス
+- **コマンドシステム** - 19以上の組み込みコマンドとエイリアス
 - **Tabオートコンプリート** - スマートなコマンド提案
 - **コマンド履歴** - ↑/↓で前のコマンドをナビゲート
 - **テーマ切り替え** - 複数のカラースキーム（matrix、dracula、monokaiなど）
+- **Matrixエフェクト** - トグル可能なデジタル雨の背景と404ページ
+- **オーディオエフェクト** - Web Audio APIによるレトロなタイピング音
 - **タイピングアニメーション** - 設定可能なタイピング速度（1-500文字/秒）
 - **スネークゲーム** - ターミナルに組み込まれたクラシックなスネークゲーム
+- **コーヒーコマンド** - 統計追跡付きバーチャルコーヒー
 - **モバイルレスポンシブ** - すべての画面サイズに最適化
 - **プリコミットフック** - 自動リント、型チェック、フォーマット
 
@@ -652,7 +743,9 @@ act --secret-file .secrets
 | `welcome`  | -             | ウェルカムメッセージを表示         |
 | `summary`  | -             | プロフェッショナルサマリーを表示   |
 | `skills`   | -             | 技術スキルをリスト                 |
+| `awards`   | -             | 賞と実績を表示                     |
 | `contact`  | -             | 連絡先情報を表示                   |
+| `weather`  | -             | 現在の天気を確認                   |
 | `neofetch` | `nf`, `fetch` | システム情報を表示                 |
 | `resume`   | `cv`          | 履歴書をダウンロード               |
 | `github`   | `gh`          | GitHubプロフィールを開く           |
@@ -660,6 +753,9 @@ act --secret-file .secrets
 | `blog`     | -             | 開発ブログを開く                   |
 | `theme`    | -             | ターミナルテーマを変更             |
 | `typing`   | -             | タイピングアニメーション速度を設定 |
+| `matrix`   | -             | Matrixデジタル雨エフェクトをトグル |
+| `audio`    | -             | オーディオエフェクトをトグル       |
+| `coffee`   | -             | バーチャルコーヒーを淹れる         |
 | `snake`    | -             | スネークゲームをプレイ             |
 | `clear`    | `cls`         | ターミナル画面をクリア             |
 
@@ -667,23 +763,45 @@ act --secret-file .secrets
 
 ```
 src/
-├── app/                    # Next.js App Router
-├── commands/               # ターミナルコマンド
-│   ├── snake/             # スネークゲーム（リファクタリング済み）
-│   │   ├── components/    # UIコンポーネント
-│   │   ├── game-logic.ts  # ゲームロジック
-│   │   ├── types.ts       # 型と定数
-│   │   └── snake-game.tsx # メインゲームコンポーネント
-│   ├── *.tsx              # 個別コマンド
-│   └── index.ts           # コマンドレジストリ
-├── components/            # 共有コンポーネント
-│   ├── command-input/    # コマンド入力コンポーネント
-│   └── terminal/         # ターミナルコンポーネント
-├── contexts/             # Reactコンテキスト
-├── hooks/                # カスタムReactフック
-├── types/                # TypeScript型
-├── utils/                # ユーティリティ関数
-└── config/               # 設定ファイル
+├── app/                       # Next.js App Router
+├── commands/                  # ターミナルコマンド
+│   ├── audio/                # オーディオコマンド（リファクタリング済み）
+│   │   ├── audio-toggle.tsx  # トグルコンポーネント
+│   │   ├── use-audio-toggle.ts # トグルフック
+│   │   └── index.tsx         # コマンドエクスポート
+│   ├── coffee/               # コーヒーコマンド（リファクタリング済み）
+│   │   ├── components/       # コーヒーUIコンポーネント
+│   │   ├── types.ts          # 型と定数
+│   │   └── index.tsx         # コマンドエクスポート
+│   ├── matrix/               # Matrixコマンド（リファクタリング済み）
+│   │   ├── matrix-toggle.tsx # トグルコンポーネント
+│   │   ├── use-matrix-toggle.ts # トグルフック
+│   │   └── index.tsx         # コマンドエクスポート
+│   ├── snake/                # スネークゲーム（リファクタリング済み）
+│   │   ├── components/       # ゲームUIコンポーネント
+│   │   ├── game-logic.ts     # ゲームロジック
+│   │   ├── types.ts          # 型と定数
+│   │   └── snake-game.tsx    # メインゲームコンポーネント
+│   ├── *.tsx                 # 個別コマンド
+│   └── index.ts              # コマンドレジストリ
+├── components/               # 共有コンポーネント
+│   ├── command-input/       # コマンド入力コンポーネント
+│   ├── matrix-rain/         # Matrix雨エフェクト
+│   │   ├── index.tsx        # メインコンポーネント
+│   │   ├── matrix-constants.ts # 定数
+│   │   └── use-matrix-animation.ts # アニメーションフック
+│   └── terminal/            # ターミナルコンポーネント
+├── contexts/                # Reactコンテキスト
+│   ├── audio-context.tsx    # オーディオ状態管理
+│   ├── matrix-context.tsx   # Matrix状態管理
+│   └── ...                  # その他のコンテキスト
+├── hooks/                   # カスタムReactフック
+│   ├── use-is-mounted.ts    # クライアントマウント検出
+│   ├── use-typing-sound.ts  # タイピング音エフェクト
+│   └── ...                  # その他のフック
+├── types/                   # TypeScript型
+├── utils/                   # ユーティリティ関数
+└── config/                  # 設定ファイル
 ```
 
 ### 🔧 開発
@@ -727,6 +845,20 @@ pnpm typecheck
 - 290行のモノリスを10個の整理されたファイルにリファクタリング
 - 保守性とテスト性を向上
 - kebab-case命名規則に従う
+
+**フェーズ3：MatrixRainコンポーネント** ✅
+
+- 再利用のためMatrixRainコンポーネントを抽出（404ページ + ターミナル背景）
+- 状態永続化のためlocalStorageを使用したmatrixコンテキストを作成
+- MatrixRainコンポーネントを102行から25行に削減（77%削減）
+- 関心の分離：定数、アニメーションフック、背景コンポーネント
+
+**フェーズ4：オーディオ & Matrixコマンド** ✅
+
+- オーディオとmatrixコマンドにクリーンアーキテクチャパターンを適用
+- ロジック（カスタムフック）とプレゼンテーション（コンポーネント）を分離
+- 明確な構造のフォルダーに整理：フック + コンポーネント + インデックス
+- 複雑なコマンド全体で一貫したパターン
 
 ### 📄 ライセンス
 

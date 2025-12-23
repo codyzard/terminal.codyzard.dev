@@ -1,4 +1,5 @@
 import {commandRegistry} from '../utils/command-registry'
+import {audioCommand} from './audio'
 import {awardsCommand} from './awards'
 import {blogCommand} from './blog'
 import {clearCommand} from './clear'
@@ -41,6 +42,7 @@ commandRegistry.registerBulk([
   snakeCommand,
   coffeeCommand,
   matrixCommand,
+  audioCommand,
 ])
 
 // Set the registry for help command to access
