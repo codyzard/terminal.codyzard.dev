@@ -1,5 +1,6 @@
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 
 const inter = Inter({subsets: ['latin']})
@@ -82,13 +83,14 @@ export default function RootLayout({
 
   return (
     <html lang='en'>
-      <head>
-        <script
+      <body className={`${inter.className} antialiased`}>
+        <Script
+          id='json-ld'
           type='application/ld+json'
           dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
         />
-      </head>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+        {children}
+      </body>
     </html>
   )
 }

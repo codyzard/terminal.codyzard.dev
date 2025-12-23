@@ -7,6 +7,7 @@ import {contactCommand} from './contact'
 import {githubCommand} from './github'
 import {helpCommand, setCommandRegistry} from './help'
 import {linkedinCommand} from './linkedin'
+import {matrixCommand} from './matrix'
 import {neofetchCommand} from './neofetch'
 import {resumeCommand} from './resume'
 import {skillsCommand} from './skills'
@@ -39,6 +40,7 @@ commandRegistry.registerBulk([
   typingCommand,
   snakeCommand,
   coffeeCommand,
+  matrixCommand,
 ])
 
 // Set the registry for help command to access
