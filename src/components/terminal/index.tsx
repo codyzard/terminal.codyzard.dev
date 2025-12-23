@@ -1,11 +1,11 @@
 'use client'
 import CommandHistory from '../command-history'
 import CommandInput from '../command-input'
-import {MatrixRain} from '../matrix-rain'
 import {useIsMounted} from '@/src/hooks/use-is-mounted'
 import {useMatrix} from '@/src/contexts/matrix-context'
 import {TerminalScrollProvider} from '@/src/contexts/terminal-scroll-context'
 import {useCallback} from 'react'
+import {TerminalMatrixBackground} from './terminal-matrix-background'
 import {useTerminal} from './hooks/use-terminal'
 
 export const Terminal = () => {
@@ -29,17 +29,15 @@ export const Terminal = () => {
     })
   }, [historyEndRef])
 
+  const shouldUseTransparentBg = isMounted && isMatrixEnabled
+
   return (
     <div
       className='terminal relative h-screen overflow-y-auto p-4 font-mono text-sm md:text-base'
       onClick={focusInput}
-      style={isMounted && isMatrixEnabled ? {backgroundColor: 'transparent'} : undefined}
+      style={shouldUseTransparentBg ? {backgroundColor: 'transparent'} : undefined}
     >
-      {isMounted && isMatrixEnabled && (
-        <div className='pointer-events-none fixed inset-0 z-0 bg-black'>
-          <MatrixRain className='absolute inset-0' opacity={0.15} />
-        </div>
-      )}
+      <TerminalMatrixBackground />
       <div className='relative z-10'>
         <TerminalScrollProvider requestScroll={requestScroll}>
           <CommandHistory history={history} />
