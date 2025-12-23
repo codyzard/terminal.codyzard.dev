@@ -2,6 +2,7 @@
 import type {ReactNode} from 'react'
 import {createContext, useContext} from 'react'
 import {useLocalStorage} from '../hooks/use-local-storage'
+import {useIsMounted} from '../hooks/use-is-mounted'
 
 export type ThemeName =
   | 'dark'
@@ -42,6 +43,10 @@ type ThemeWrapperProps = {
 
 export const ThemeWrapper = ({children}: ThemeWrapperProps) => {
   const {theme} = useTheme()
+  const isMounted = useIsMounted()
 
-  return <div className={`app-container ${theme}`}>{children}</div>
+  // Use default theme during SSR to prevent hydration mismatch
+  const appliedTheme = isMounted ? theme : 'dark'
+
+  return <div className={`app-container ${appliedTheme}`}>{children}</div>
 }
