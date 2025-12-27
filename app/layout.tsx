@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     'typescript',
     'web development',
   ],
+  alternates: {
+    canonical: 'https://terminal.codyzard.dev',
+  },
   authors: [{name: 'Le Hoang Tu', url: 'https://terminal.codyzard.dev'}],
   creator: 'Le Hoang Tu',
   metadataBase: new URL('https://terminal.codyzard.dev'),
