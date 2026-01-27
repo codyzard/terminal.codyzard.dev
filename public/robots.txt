@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://terminal.codyzard.dev/sitemap.xml
+
+# Disallow admin or private paths if any
+# User-agent: *
+# Disallow: /admin/

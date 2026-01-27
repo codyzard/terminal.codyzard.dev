@@ -1,0 +1,16 @@
+{
+  "name": "Codyzard Terminal Portfolio",
+  "short_name": "Codyzard",
+  "description": "Le Hoang Tu's developer portfolio presented as a command-line interface",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#22d3ee",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
